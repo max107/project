@@ -1,9 +1,11 @@
 <?php
 
+use Mindy\Template\Renderer;
+
 return \Mindy\Helper\Settings::override(require(__DIR__ . '/settings.php'), [
     'components' => [
-        'db' => [
-
-        ]
+        'template' => [
+            'mode' => Renderer::RECOMPILE_ALWAYS,
+        ],
     ]
 ]);

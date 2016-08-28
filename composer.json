@@ -18,7 +18,8 @@
   },
   "require": {
     "php": ">=7.0",
-    "mindy/framework": "dev-master"
+    "mindy/framework": "dev-master",
+    "mindy/template": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
