@@ -10,6 +10,18 @@ return [
         ]
     ],
     'components' => [
+        'db' => [
+            'class' => '\Mindy\Query\ConnectionManager',
+            'databases' => [
+                'default' => [
+                    'class' => '\Mindy\Query\Connection',
+                    'dsn' => 'mysql:host=127.0.0.1;dbname=test',
+                    'username' => 'root',
+                    'password' => '',
+                    'charset' => 'utf8',
+                ]
+            ]
+        ],
         'template' => [
             'class' => '\Mindy\Template\Renderer',
             'mode' => \Mindy\Template\Renderer::RECOMPILE_NEVER,

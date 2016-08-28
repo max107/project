@@ -19,7 +19,11 @@
   "require": {
     "php": ">=7.0",
     "mindy/framework": "dev-master",
-    "mindy/template": "dev-master"
+    "mindy/template": "dev-master",
+    "mindy/orm": "^2.0",
+    "mindy/query_builder": "^1.0",
+    "mindy/query": "^2.0",
+    "mindy/locale": "2.0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

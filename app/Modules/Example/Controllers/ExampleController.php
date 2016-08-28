@@ -8,22 +8,16 @@
 
 namespace Modules\Example\Controllers;
 
-use Mindy\Controller\BaseController;
-use Mindy\Helper\Traits\RenderTrait;
+use Modules\Core\Controllers\Controller;
+use Modules\Example\Models\Category;
 
-class ExampleController extends BaseController
+class ExampleController extends Controller
 {
-    use RenderTrait;
-
-    protected function render($template, array $data = [])
-    {
-        return self::renderTemplate($template, $data);
-    }
-
     public function getIndex()
     {
-        echo $this->render('example/index.html', [
-            'foo' => 'bar'
+        $models = Category::objects()->all();
+        echo $this->renderTemplate('example/index.html', [
+            'models' => $models
         ]);
     }
 }
