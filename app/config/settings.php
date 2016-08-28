@@ -5,11 +5,19 @@ define('BASE_PATH', realpath(__DIR__ . '/..'));
 return [
     'basePath' => BASE_PATH,
     'modules' => [
-        'Example' => [
-            'class' => \Modules\Example\ExampleModule::class
-        ]
+        'Admin',
+        'User',
+        'Core',
+        'Example'
     ],
     'components' => [
+        'permissions' => [
+            'class' => '\Mindy\Permissions\PermissionManager'
+        ],
+        'auth' => [
+            'class' => '\Mindy\Auth\AuthProvider',
+            'userClass' => '\Modules\User\Models\User'
+        ],
         'db' => [
             'class' => '\Mindy\Query\ConnectionManager',
             'databases' => [
