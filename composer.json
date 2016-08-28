@@ -1,0 +1,38 @@
+{
+  "name": "mindy/project",
+  "homepage": "https://github.com/MindyPHP/Mindy_Framework",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "App\\Modules\\": "app/Modules/",
+      "Modules\\": "app/Modules/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\": "app/",
+      "App\\Modules\\": "app/Modules/",
+      "Modules\\": "app/Modules/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "mindy/framework": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "phpunit/php-code-coverage": "*"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy/issues?state=open"
+  }
+}
