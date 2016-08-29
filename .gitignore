@@ -7,5 +7,3 @@ coverage
 .DS_Store
 
 app/runtime/*
-app/Modules/*
-!app/Modules/Example
