@@ -2,6 +2,7 @@
   "name": "mindy/project",
   "homepage": "https://github.com/MindyPHP/Mindy_Framework",
   "license": "BSD",
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "App\\": "app/",
@@ -19,11 +20,11 @@
   "require": {
     "php": ">=7.0",
     "mindy/framework": "dev-master",
+    "mindy/locale": "2.0.2",
     "mindy/template": "dev-master",
-    "mindy/orm": "^2.0",
-    "mindy/query_builder": "^1.0",
-    "mindy/query": "^2.0",
-    "mindy/locale": "2.0.2"
+    "mindy/query": "dev-master",
+    "mindy/orm": "dev-master",
+    "mindy/query_builder": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
