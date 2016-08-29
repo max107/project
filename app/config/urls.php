@@ -2,8 +2,11 @@
 
 use Mindy\Router\Patterns;
 
-return [
-    '/' => new Patterns(__DIR__ . '/../Modules/Example/urls.php'),
+define('MODULES_PATH', realpath(__DIR__ . '/../Modules'));
 
-    '/admin' => new Patterns(__DIR__ . '/../Modules/Admin/urls.php', 'admin')
+return [
+//    '/' => new Patterns(MODULES_PATH . '/Example/urls.php'),
+
+    '/admin' => new Patterns(MODULES_PATH . '/Admin/urls.php', 'admin'),
+    '/core' => new Patterns(MODULES_PATH . '/Core/urls.php', 'core')
 ];

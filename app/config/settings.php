@@ -11,9 +11,9 @@ return [
         'Example'
     ],
     'components' => [
-        'permissions' => [
-            'class' => '\Mindy\Permissions\PermissionManager'
-        ],
+//        'permissions' => [
+//            'class' => '\Mindy\Permissions\PermissionManager'
+//        ],
         'auth' => [
             'class' => '\Mindy\Auth\AuthProvider',
             'userClass' => '\Modules\User\Models\User'
@@ -23,7 +23,7 @@ return [
             'databases' => [
                 'default' => [
                     'class' => '\Mindy\Query\Connection',
-                    'dsn' => 'mysql:host=127.0.0.1;dbname=test',
+                    'dsn' => 'mysql:host=localhost;dbname=test',
                     'username' => 'root',
                     'password' => '',
                     'charset' => 'utf8',
