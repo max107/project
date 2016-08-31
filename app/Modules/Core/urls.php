@@ -4,20 +4,20 @@ return [
     [
         'route' => '/modules/',
         'name' => 'module_list',
-        'callback' => '\Modules\Core\Controllers\Admin\ModulesController:list'
+        'callback' => '\Modules\Core\Controllers\Admin\ModulesController:actionList'
     ],
     [
         'route' => '/routes/',
         'name' => 'route_list',
-        'callback' => '\Modules\Core\Controllers\Admin\RouteController:list'
+        'callback' => '\Modules\Core\Controllers\Admin\RouteController:actionLlist'
     ],
-    '/modules/' => [
+    '/module/' => [
         'namespace' => 'module',
         'routes' => [
             [
                 'route' => '/list',
                 'name' => 'list',
-                'callback' => '\Modules\Core\Controllers\Admin\ModulesController:list'
+                'callback' => '\Modules\Core\Controllers\Admin\ModulesController:actionList'
             ],
         ]
     ]
