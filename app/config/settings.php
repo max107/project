@@ -14,6 +14,9 @@ return [
 //        'permissions' => [
 //            'class' => '\Mindy\Permissions\PermissionManager'
 //        ],
+        'locale' => [
+            'class' => '\Mindy\Locale\Locale'
+        ],
         'auth' => [
             'class' => '\Mindy\Auth\AuthProvider',
             'userClass' => '\Modules\User\Models\User'
@@ -29,6 +32,22 @@ return [
                     'charset' => 'utf8',
                 ]
             ]
+        ],
+        'finder' => [
+            'class' => '\Mindy\Finder\Finder',
+            'finders' => [
+                ['class' => '\Mindy\Finder\Finder\TemplateFinder', 'basePath' => BASE_PATH],
+                /*
+                [
+                    'class' => '\Mindy\Finder\Finder\ThemeTemplateFinder',
+                    'theme' => function () {
+                        static $isMobile = false;
+                        return $isMobile ? 'mobile' : 'default';
+                    }
+                ],
+                */
+                ['class' => '\Mindy\Finder\Finder\AppTemplateFinder', 'basePath' => BASE_PATH . '/Modules'],
+            ],
         ],
         'template' => [
             'class' => '\Mindy\Template\Renderer',
