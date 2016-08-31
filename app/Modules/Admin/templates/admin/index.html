@@ -5,15 +5,38 @@
 {% endblock %}
 
 {% block content %}
+    {% set icons = [
+    'settings' => 'Настройки',
+    'mail' => 'Почта',
+    'newspaper' => 'Страницы',
+    'package' => 'Модули',
+    'paper-plane' => 'Уведомления',
+    'play-button' => 'Видео',
+    'shield' => 'Безопасность',
+    'shirt' => 'Темы',
+    'shopping-bag-2' => 'Магазин',
+    'speech-bubble-1' => 'Помощь'
+    'salad' => 'Рецепты'
+    ] %}
     <div class="row">
         <div class="columns small-12">
-            <ul class="small-block-grid-4">
-                {% for name in ['settings', 'package', 'paper-plane', 'shield', 'speech-bubble-1', 'newspaper'] %}
-                <li>
-                    {% include "admin/icons/" ~ name ~ ".svg" %} Settings
-                </li>
-                {% endfor %}
-            </ul>
+            {% for name, items in menu %}
+                <div class="admin-index-menu">
+                    <div class="admin-index-module-name">{{ name }}</div>
+                    <ul class="small-block-grid-5">
+                        {% for route in items %}
+                            <li>
+                                <div class="admin-index-menu-item">
+                                    <div class="admin-index-menu-icon">
+                                        {% include route.icon ? route.icon : "admin/icons/unknown.svg" %}
+                                    </div>
+                                    <a href="{{ route.url }}">{{ route.name }}</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
         </div>
     </div>
     <div class="row">

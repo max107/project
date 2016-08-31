@@ -8,6 +8,7 @@
 
 namespace Modules\Admin\Controllers;
 
+use function Mindy\app;
 use Modules\Core\Controllers\BackendController;
 
 class DashboardController extends BackendController
@@ -26,8 +27,14 @@ class DashboardController extends BackendController
             $dashboards[] = new $cls;
         }
 
+        $menu = [];
+        foreach (app()->getModules(true) as $name => $module) {
+            $menu[$module->getName()] = $module->getAdminMenu();
+        }
+
         echo $this->render('admin/index.html', [
-            'dashboards' => $dashboards
+            'dashboards' => $dashboards,
+            'menu' => $menu
         ]);
     }
 }
