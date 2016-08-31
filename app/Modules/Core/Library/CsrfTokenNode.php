@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace Modules\Core\Library;
+
+use Mindy\Template\Compiler;
+use Mindy\Template\Node;
+
+/**
+ * Class CsrfTokenNode
+ * @package Mindy\Template
+ */
+class CsrfTokenNode extends Node
+{
+    public function compile(Compiler $compiler, $indent = 0)
+    {
+        $compiler->addTraceInfo($this, $indent);
+//        $compiler->raw("echo '<input type=\"hidden\" value=\'' . \\Mindy\\Base\\Mindy::app()->request->csrf->getValue() . '\' name=\"' . \\Mindy\\Base\\Mindy::app()->request->csrf->getName() . '\" />';\n", $indent);
+//        $compiler->raw("echo '<input type=\"hidden\" value=\'' . \\Mindy\\Base\\Mindy::app()->request->csrf->getValue() . '\' name=\"' . \\Mindy\\Base\\Mindy::app()->request->csrf->getName() . '\" />';\n", $indent);
+    }
+}
