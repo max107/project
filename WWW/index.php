@@ -7,7 +7,11 @@ defined('MINDY_DEBUG') or define('MINDY_DEBUG', true);
 $config = 'settings.php';
 if (MINDY_DEBUG) {
     $whoops = new \Whoops\Run;
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    if (php_sapi_name() === 'cli') {
+        $whoops->pushHandler(new \Whoops\Handler\PlainTextHandler);
+    } else {
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    }
     $whoops->register();
 
     $config = 'settings_local.php';

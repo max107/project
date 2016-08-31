@@ -26,7 +26,7 @@ return [
             'databases' => [
                 'default' => [
                     'class' => '\Mindy\Query\Connection',
-                    'dsn' => 'mysql:host=localhost;dbname=test',
+                    'dsn' => 'mysql:host=localhost;dbname=mindy2',
                     'username' => 'root',
                     'password' => '',
                     'charset' => 'utf8',
