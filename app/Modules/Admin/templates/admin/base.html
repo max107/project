@@ -40,33 +40,49 @@
                                     <p class="header--user__username">{{ t('Welcome', 'admin') }} {{ user.username }}</p>
                                 </li>
                                 <li>
-                                    <i class="icon external"></i>
-                                    <a class="header--user__opensite"
-                                       href="/" target="_blank">
-                                        {{ t('Open site', 'admin') }}
-                                    </a>
+                                    <div class="header-menu-item">
+                                        <div class="header-menu-icon">
+                                            {% include "admin/link.svg" %}
+                                        </div>
+                                        <a class="header--user__opensite"
+                                           href="/" target="_blank">
+                                            {{ t('Open site', 'admin') }}
+                                        </a>
+                                    </div>
                                 </li>
                                 <li>
-                                    <i class="icon key"></i>
-                                    <a class="header--user__changepassword"
-                                       href="{% url 'admin:action' with ['module' => 'User', 'admin' => 'UserAdmin', 'action' => 'changePassword'] %}?pk={{ user.pk }}">
-                                        {{ t('Change password', 'admin') }}
-                                    </a>
+                                    <div class="header-menu-item">
+                                        <div class="header-menu-icon">
+                                            {% include "admin/password.svg" %}
+                                        </div>
+                                        <a class="header--user__changepassword"
+                                           href="{% url 'admin:action' with ['module' => 'User', 'admin' => 'UserAdmin', 'action' => 'changePassword'] %}?pk={{ user.pk }}">
+                                            {{ t('Change password', 'admin') }}
+                                        </a>
+                                    </div>
                                 </li>
                                 {% if user.can('admin.change_settings') %}
                                     <li>
-                                        <i class="icon options"></i>
-                                        <a href="{% url 'admin:settings' %}"
-                                           class="header--user__settings">
-                                            {{ t('Settings', 'core') }}
-                                        </a>
+                                        <div class="header-menu-item">
+                                            <div class="header-menu-icon">
+                                                {% include "admin/setting.svg" %}
+                                            </div>
+                                            <a href="{% url 'admin:settings' %}"
+                                               class="header--user__settings">
+                                                {{ t('Settings', 'core') }}
+                                            </a>
+                                        </div>
                                     </li>
                                 {% endif %}
                                 <li>
-                                    <i class="icon power"></i>
-                                    <a class="header--user__logout" href="{% url 'admin:logout' %}">
-                                        {{ t('Logout', 'auth') }}
-                                    </a>
+                                    <div class="header-menu-item">
+                                        <div class="header-menu-icon">
+                                            {% include "admin/logout.svg" %}
+                                        </div>
+                                        <a class="header--user__logout" href="{% url 'admin:logout' %}">
+                                            {{ t('Logout', 'auth') }}
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -76,7 +92,7 @@
                         <ul class="header--main">
                             <li>
                                 <a href="#" class="header--button__menu">
-                                    <i class="icon sidebar"></i>
+                                    {% include "admin/menu.svg" %}
                                     {% block name %}
                                         <span class="header--title">
                                             {{ module.getName() ? module.getName() : t('Dashboard', 'admin') }}

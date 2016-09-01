@@ -49,15 +49,17 @@ class AdminModule extends Module
         return $this->dashboards;
     }
 
-    public function getMenu()
+    public function getAdminMenu()
     {
         return [
-            'name' => self::t('Dashboard'),
-            'items' => [
-                [
-                    'name' => self::t('Dashboard'),
-                    'url' => 'admin:index'
-                ],
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Dashboard'),
+                'icon' => 'admin/icons/dashboard.svg'
             ]
         ];
     }

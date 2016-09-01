@@ -142,7 +142,7 @@ abstract class BaseAdmin extends BackendController
     {
         $url = $this->reverse('admin:action', [
             'module' => $this->getModule()->getId(),
-            'adminClass' => $this->classNameShort(),
+            'admin' => $this->classNameShort(),
             'action' => $action
         ]);
         if (!empty($params)) {
