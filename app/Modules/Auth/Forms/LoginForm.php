@@ -51,7 +51,10 @@ class LoginForm extends Form
         $password = $this->password->getValue();
 
         $auth = Mindy::app()->auth;
-        $state = $auth->authenticate('local', $username, $password);
+        $state = $auth->authenticate('local', [
+            'username' => $username,
+            'password' => $password
+        ]);
         if (is_array($state)) {
             $this->addErrors($state);
         }

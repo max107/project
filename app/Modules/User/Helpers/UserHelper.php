@@ -21,6 +21,7 @@ class UserHelper
      * Создание пользователя
      * @param array $attributes
      * @param bool $notify
+     * @param bool $passwordHash
      * @return User
      */
     public static function createUser(array $attributes, $notify = true, $passwordHash = true)

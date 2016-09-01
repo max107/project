@@ -3,6 +3,14 @@
     <title>Base template</title>
 </head>
 <body>
+<div class="header">
+    <div class="row">
+        <div class="columns small-12">
+            <p>Guest: {{ user.isGuest }}</p>
+            <p>Username: {{ user.username }}</p>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="columns small-12">
         {% block content %}

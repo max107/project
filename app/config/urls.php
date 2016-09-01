@@ -19,6 +19,10 @@ return [
         'namespace' => 'auth',
         'routes' => include(MODULES_PATH . '/Auth/urls.php')
     ],
+    '/user' => [
+        'namespace' => 'user',
+        'routes' => include(MODULES_PATH . '/User/urls.php')
+    ],
     '/' => [
         'namespace' => 'recipe',
         'routes' => include(MODULES_PATH . '/Recipe/urls.php')

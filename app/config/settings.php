@@ -23,7 +23,13 @@ return [
         ],
         'auth' => [
             'class' => '\Mindy\Auth\AuthProvider',
-            'userClass' => '\Modules\User\Models\User'
+            'userClass' => '\Modules\User\Models\User',
+            'passwordHashers' => [
+                'mindy' => '\Mindy\Auth\PasswordHasher\MindyPasswordHasher'
+            ],
+            'strategies' => [
+                'local' => '\Mindy\Auth\Strategy\LocalStrategy'
+            ]
         ],
         'db' => [
             'class' => '\Mindy\Query\ConnectionManager',

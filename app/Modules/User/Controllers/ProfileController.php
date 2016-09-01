@@ -9,6 +9,7 @@
 
 namespace Modules\User\Controllers;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Modules\Core\Controllers\FrontendController;
 
@@ -59,6 +60,14 @@ class ProfileController extends FrontendController
         echo $this->render('user/profile/form.html', [
             'model' => $user,
             'form' => $form,
+        ]);
+    }
+
+    public function getProfile()
+    {
+        $user = app()->auth->getUser();
+        echo $this->render('user/profile/view.html', [
+            'model' => $user
         ]);
     }
 }
