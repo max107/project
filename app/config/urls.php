@@ -14,5 +14,13 @@ return [
     '/core' => [
         'namespace' => 'core',
         'routes' => include(MODULES_PATH . '/Core/urls.php')
+    ],
+    '/auth' => [
+        'namespace' => 'auth',
+        'routes' => include(MODULES_PATH . '/Auth/urls.php')
+    ],
+    '/' => [
+        'namespace' => 'recipe',
+        'routes' => include(MODULES_PATH . '/Recipe/urls.php')
     ]
 ];

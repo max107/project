@@ -1,0 +1,29 @@
+#totop {
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 0;
+    z-index: 1;
+    text-align: center;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#totop a {
+    text-decoration: none;
+    color: #ccc;
+    padding-top: 20px;
+}
+
+#totop:hover {
+    background-color: #f7f7f7;
+}
+
+#totop:hover a {
+    color: #353535;
+}

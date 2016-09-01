@@ -17,6 +17,7 @@ use Mindy\Helper\Creator;
 use Mindy\Orm\Fields\BooleanField;
 use Mindy\Orm\Fields\HasManyField;
 use Mindy\Orm\Fields\ManyToManyField;
+use Mindy\Orm\Manager;
 use Mindy\Orm\Model;
 use Mindy\Orm\TreeModel;
 use Mindy\Pagination\Pagination;
@@ -335,7 +336,11 @@ abstract class Admin extends BaseAdmin
                 'value' => $value
             ]);
         } else {
-            return $value;
+            if ($value instanceof Manager) {
+                return get_class($value);
+            } else {
+                return $value;
+            }
         }
     }
 
@@ -721,7 +726,7 @@ abstract class Admin extends BaseAdmin
         $instance = $cls::objects()->get(['pk' => $pk]);
         $redirectUrl = $this->reverse('admin:action', [
             'module' => $this->getModule()->getId(),
-            'adminClass' => $this->classNameShort(),
+            'admin' => $this->classNameShort(),
             'action' => 'list'
         ]);
 
@@ -791,7 +796,7 @@ abstract class Admin extends BaseAdmin
     {
         $baseParams = [
             'module' => $this->getModule()->getId(),
-            'adminClass' => $this->classNameShort(),
+            'admin' => $this->classNameShort(),
         ];
 
         $model = $form instanceof ModelForm ? $form->getInstance() : null;
@@ -828,7 +833,7 @@ abstract class Admin extends BaseAdmin
             $breadcrumbs[] = [
                 'url' => $this->reverse('admin:action', [
                         'module' => $this->getModule()->getId(),
-                        'adminClass' => $this->classNameShort(),
+                        'admin' => $this->classNameShort(),
                         'action' => 'list'
                     ]) . '?' . http_build_query(['pk' => $parent->pk]),
                 'name' => (string)$parent,

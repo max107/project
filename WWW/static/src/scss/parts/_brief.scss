@@ -1,0 +1,173 @@
+.brief-container {
+  .brief-text {
+    text-align: center;
+  }
+
+  .brief-form-container {
+    padding: 40px 0;
+
+    #brief-form {
+      @include clearfix;
+
+      .row {
+        margin-bottom: 20px;
+      }
+
+      .brief-confirm {
+        @include border-radius(5px);
+        background-color: #f1f1f1;
+        padding: 20px;
+
+        [type="text"], [type="submit"] {
+          margin: 0;
+          width: 100%;
+        }
+
+        [type="text"] {
+          @media #{$small-only} {
+            margin-bottom: 20px;
+          }
+        }
+
+        .row {
+          margin-bottom: 0;
+        }
+      }
+
+      .help-text {
+        font-size: 0.8rem;
+        color: #aaa;
+        display: block;
+        text-align: left;
+      }
+
+      .right-side {
+        @media #{$small-only} {
+          margin-top: 10px;
+        }
+
+        .select-list {
+          li {
+            padding-bottom: 5px;
+          }
+        }
+
+        label {
+          @include antialias;
+          position: relative;
+          font-size: 0.9rem;
+          color: $text-color;
+          text-align: left;
+          margin-bottom: 10px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        textarea {
+          min-height: 100px;
+        }
+
+        [type="radio"],
+        [type="checkbox"] {
+          @include float-left;
+//          margin-top: 8px;
+          position: relative;
+          width: 39px;
+          height: 22px;
+          visibility: hidden;
+          margin-bottom: 8px;
+        }
+
+        [type="radio"] + label:after,
+        [type="checkbox"] + label:after {
+          @include transition($defaultTransition);
+          display: block;
+          content: " ";
+          position: absolute;
+          top: 2px;
+
+          background: {
+            color: transparent;
+            position: 0 0;
+            repeat: no-repeat;
+          };
+        }
+
+        [type="radio"] + label:after {
+          width: 22px;
+          height: 22px;
+          left: -22px;
+        }
+
+        [type="checkbox"] + label:after {
+          width: 39px;
+          height: 21px;
+          left: -56px;
+        }
+
+        [type="radio"] + label {
+          margin-left: 24px;
+        }
+
+        [type="radio"] + label + .help-text {
+          margin-left: 40px;
+          margin-top: 10px;
+        }
+
+        [type="checkbox"] + label {
+          margin-left: 58px;
+        }
+
+        [type="radio"] + label,
+        [type="checkbox"] + label {
+          display: block;
+          margin-bottom: 0;
+        }
+
+        [type="checkbox"] + label:after {
+          background-image: url(../images/main/brief/checkbox.png);
+        }
+
+        [type="checkbox"]:checked + label:after {
+          background-image: url(../images/main/brief/checkbox-checked.png);
+        }
+
+        [type="radio"] + label:after {
+          background-image: url(../images/main/brief/radio.png);
+        }
+
+        [type="radio"]:checked + label:after {
+          background-image: url(../images/main/brief/radio-checked.png);
+        }
+      }
+
+      .left-side {
+        label {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .help-text, label, .left-side-title {
+          text-align: right;
+          color: $text-color;
+
+          @media #{$small-only} {
+            text-align: left;
+          }
+        }
+
+        .help-text {
+          color: #aaa;
+        }
+
+        label, .left-side-title {
+          @include antialias;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

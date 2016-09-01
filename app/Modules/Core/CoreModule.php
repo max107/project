@@ -24,6 +24,30 @@ class CoreModule extends Module
         ];
     }
 
+    public function getAdminMenu()
+    {
+        return [
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Modules'),
+                'icon' => 'admin/icons/package.svg'
+            ],
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Routes'),
+                'icon' => 'admin/icons/route.svg'
+            ]
+        ];
+    }
+
     public function getVersion()
     {
         return 2.0;

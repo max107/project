@@ -18,10 +18,19 @@ class RecipeModule extends Module
             [
                 'url' => $this->reverse('admin:action', [
                     'action' => 'list',
-                    'admin' => 'Recipe',
+                    'admin' => 'RecipeAdmin',
                     'module' => $this->getId()
                 ]),
                 'name' => self::t('Recipes'),
+                'icon' => 'admin/icons/salad.svg'
+            ],
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'CategoryAdmin',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Categories'),
                 'icon' => 'admin/icons/salad.svg'
             ]
         ];

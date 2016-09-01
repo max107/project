@@ -1,0 +1,51 @@
+.tabs {
+  margin-bottom: 20px !important;
+
+  .tabs-navigation {
+    @include reset-list;
+    @include clearfix;
+    margin-bottom: -1px;
+
+    li {
+      @include float-left;
+      font-size: 1rem;
+      padding: 5px 10px;
+      background-color: #f4f4f4;
+      border-color: transparent;
+      border-color: transparent transparent #ccc transparent;
+      border-width: 1px;
+      border-style: solid;
+
+      &:hover:not(.active) {
+        background-color: #ccc;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+
+      &.active {
+        border-color: #ccc #ccc #fff #ccc;
+        background-color: #fff;
+
+        a {
+          cursor: default;
+        }
+      }
+
+      a {
+        color: $text-color;
+      }
+    }
+  }
+
+  .tabs-panel {
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}

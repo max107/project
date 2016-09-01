@@ -1,0 +1,20 @@
+.flash-list {
+  @include reset-list;
+
+  li {
+    padding: 10px 15px;
+    border-radius: $border-radius;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 900;
+    @include antialias;
+
+    &.success {
+      background-color: $emerald;
+    }
+
+    &.error {
+      background-color: $pomegranate;
+    }
+  }
+}

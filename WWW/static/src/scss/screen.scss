@@ -1,0 +1,253 @@
+@import "mindy/normalize";
+@import "settings";
+@import "colors/default";
+@import "mindy/mindy";
+@import "parts/mixins";
+
+@import "vendor/tooltip";
+@import "vendor/totop";
+@import "vendor/flip";
+@import "vendor/fancybox";
+@import "vendor/mmodal";
+@import "vendor/slick";
+
+@import "block/page_header";
+
+@import "parts/input";
+@import "parts/button";
+@import "parts/flash";
+@import "parts/mnotify";
+@import "parts/brief";
+@import "parts/about";
+@import "parts/header";
+@import "parts/contacts";
+@import "parts/footer";
+@import "parts/breadcrumbs";
+@import "parts/base";
+@import "parts/portfolio";
+@import "parts/tabs";
+@import "parts/pager";
+@import "parts/services";
+@import "parts/image_fonts";
+@import "parts/svg_fonts";
+@import "parts/social_likes";
+@import "parts/team";
+@import "parts/clients";
+@import "parts/mobile_menu";
+@import "parts/blog";
+@import "parts/user";
+@import "parts/index";
+@import "parts/flash";
+@import "parts/support";
+@import "parts/service_mobile";
+
+a {
+  color: darken($main-color, 10%);
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+hr {
+  margin: $block-margin 0;
+}
+
+.block-margin {
+  margin-bottom: $block-margin;
+}
+
+.heading-text {
+  @include antialias;
+  text-align: center;
+  line-height: 26px;
+  font-size: rem-calc(18px);
+
+  @media(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+}
+
+h1, .main-title {
+  font-size: rem-calc(46px);
+  line-height: rem-calc(46px);
+  font-weight: 900;
+  @include antialias;
+  margin: 0 0 45px 0;
+  display: block;
+  color: $text-color;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: rem-calc(36px);
+  line-height: rem-calc(36px);
+  font-weight: 900;
+  @include antialias;
+  margin: 0 0 45px 0;
+  display: block;
+  color: $text-color;
+  text-decoration: none;
+}
+
+h4 {
+  @include antialias;
+  font-size: rem-calc(24px);
+  font-weight: 900;
+  line-height: rem-calc(24px);
+  margin: $block-margin / 2 0;
+}
+
+.main-title {
+  text-align: center;
+  margin: 45px 0;
+}
+
+form {
+  label {
+    .required {
+      color: $pomegranate;
+      font-weight: 900;
+    }
+  }
+}
+
+select {
+  -webkit-appearance: none;
+}
+
+.select-holder {
+  position: relative;
+  $size: 6px;
+  $color: $concrete;
+
+  &:hover {
+    &::after {
+      border: {
+        color: $main-color transparent transparent transparent;
+      }
+    }
+  }
+
+  &::after {
+    margin-top: -$size / 2;
+    margin-left: -$size;
+    top: 50%;
+    right: 15px;
+    border: {
+      width: $size;
+      style: solid;
+      color: $color transparent transparent transparent;
+    }
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.slick-arrow {
+  &.slick-next,
+  &.slick-prev {
+    $size: 32px;
+
+    position: absolute;
+    top: 50%;
+    margin-top: -($size / 2);
+    border: none;
+    outline: none;
+    z-index: 100;
+    @include hide-text;
+    display: block;
+    width: $size;
+    height: $size;
+    background: {
+      color: transparent;
+    }
+
+    &::after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #fff;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      border-radius: 100%;
+      background: {
+        color: $main-color;
+      }
+    }
+  }
+
+  &.slick-next {
+    right: 0;
+
+    &::after {
+      content: ">";
+    }
+  }
+
+  &.slick-prev {
+    left: 0;
+
+    &::after {
+      content: "<";
+    }
+  }
+}
+
+.slick-dots {
+  @include reset-list;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 5px;
+
+    &::after {
+      display: none !important;
+    }
+
+    &.slick-active {
+      button {
+        background-color: $main-color;
+      }
+    }
+
+    button {
+      $size: 18px;
+
+      @include hide-text;
+      display: block;
+      width: $size;
+      height: $size;
+      border: 0;
+      border-radius: $border-radius;
+      outline: none;
+      border: {
+        width: 2px;
+        style: solid;
+        color: $main-color;
+      }
+      background: {
+        color: transparent
+      }
+    }
+  }
+}
+
+a, img {
+  outline: none;
+}

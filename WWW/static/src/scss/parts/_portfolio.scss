@@ -1,0 +1,270 @@
+.portfolio-container {
+  .portfolio-text-container {
+    text-align: center;
+  }
+
+  .filter-container {
+    margin: 0 0 40px 0;
+
+    .filter-title {
+      margin-bottom: 5px;
+      @include antialias;
+      color: $text-gray-color;
+
+      @media #{$small-up} {
+        text-align: center;
+      }
+
+      @media #{$large-up} {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.portfolio-list {
+  text-align: center;
+  margin: 0;
+}
+
+.portfolio-item {
+  margin-bottom: 20px;
+
+  &.slider {
+    .portfolio-item-inner {
+      border: none;
+      text-align: center;
+    }
+  }
+
+  .portfolio-item-inner {
+    border-radius: $border-radius;
+    padding: 20px;
+    border: $border-size solid transparent;
+    transition: border-color .2s ease;
+    position: relative;
+
+    &:hover {
+      border-color: $main-color;
+    }
+
+    .portfolio-item-inner-img {
+      height: 200px;
+      display: block;
+      margin: 0 auto 5px;
+
+      img {
+        margin: 0 auto;
+        position: relative;
+        top: 50%;
+        @include transform(translate3d(0, -50%, 0));
+        max-width: 222px;
+        max-height: 200px;
+
+        &.retina {
+          display: none;
+        }
+
+        @media #{$retina} {
+          display: none;
+
+          &.retina {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    .portfolio-item-inner-name {
+      display: block;
+      font-size: 1.1rem;
+      @include antialias;
+      color: $text-color;
+      text-decoration: none;
+    }
+
+    .portfolio-item-inner-group {
+      display: block;
+      color: $asbestos;
+      margin: 0;
+      @include antialias;
+    }
+  }
+}
+
+.portfolio-view-container {
+  .portfolio-view {
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .portfolio-view-group {
+      color: $text-gray-color;
+      margin-bottom: $block-margin;
+      @include antialias;
+      font-size: rem-calc(18px);
+    }
+
+    .portfolio-view-content {
+      margin-top: 20px;
+      @include antialias;
+
+      &, p {
+        font-size: 1.05rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .portfolio-url-container {
+      @include antialias;
+
+      .portfolio-url-title {
+        font-weight: 900;
+        font-size: rem-calc(14px);
+      }
+
+      .portfolio-view-url {
+        color: $text-color;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        img {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .portfolio-view-tags {
+      margin-top: 15px;
+
+      .portfolio-view-tags-title {
+        color: $text-color;
+        margin: 0;
+      }
+
+      .portfolio-view-tags-list {
+        @include reset-list;
+
+        li {
+          @include inline-block;
+
+          a {
+            color: #858585;
+            font-size: 0.8rem;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    .team-list {
+      @include reset-list;
+      text-align: center;
+      margin: $block-margin * 2 0;
+
+      li {
+        display: inline-block;
+      }
+    }
+
+    .portfolio-view-nav {
+      margin-bottom: 40px;
+      @include antialias;
+
+      .left-side {
+        text-align: left;
+      }
+
+      .right-side {
+        text-align: right;
+      }
+
+      .center-side {
+        text-align: center;
+
+        a {
+          margin: 0 auto;
+        }
+      }
+
+      a {
+        color: $text-color;
+        text-decoration: none;
+        font-size: 1.05rem;
+        line-height: 32px;
+
+        svg {
+          height: 22px;
+          margin-bottom: -4px;
+        }
+      }
+    }
+
+    .portfolio-title {
+      font-weight: 900;
+      @include antialias;
+      font-size: rem-calc(24px);
+      margin: 0 0 10px 0;
+    }
+
+    .portfolio-tag-container,
+    .portfolio-url-container,
+    .portfolio-task-container,
+    .portfolio-client-container {
+      @include antialias;
+      margin-top: 0;
+      margin-bottom: 20px;
+
+      .portfolio-client-content,
+      .portfolio-url-content,
+      .portfolio-task-content {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.portfolio-loader {
+  margin: 40px 0;
+  @include opacity(0.8);
+
+  svg {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto;
+    display: block;
+
+    path, rect {
+      fill: $main-color;
+    }
+  }
+}
+
+.portfolio-empty {
+  font-size: 1.2rem;
+  color: $concrete;
+  text-align: center;
+  padding: 20px 0;
+  margin: 20px 0;
+  @include antialias;
+}
+
+.portfolio-prev-work, .portfolio-next-work {
+  display: block;
+
+  span {
+    display: inline-block;
+  }
+
+  svg {
+    height: 32px;
+  }
+}

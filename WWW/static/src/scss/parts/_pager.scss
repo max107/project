@@ -1,0 +1,40 @@
+.pager-container {
+  margin-bottom: 40px;
+
+  .pager {
+    @include reset-list;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      @include antialias;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      span, a {
+        font-size: rem-calc(14px);
+        padding: 0 6px;
+        display: inline-block;
+        border-radius: $border-radius;
+        border: $border-size solid $main-color;
+      }
+
+      span {
+        color: #fff;
+        background-color: $main-color;
+        font-weight: 900;
+      }
+
+      a {
+        font-weight: 700;
+        color: $text-color;
+
+        &:hover {
+          background-color: rgba($main-color, .2);
+        }
+      }
+    }
+  }
+}

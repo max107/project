@@ -13,6 +13,8 @@ use Modules\Recipe\Models\Recipe;
 
 class RecipeAdmin extends Admin
 {
+    public $columns = ['name', 'description_short'];
+
     /**
      * @return string model class name
      */

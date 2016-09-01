@@ -13,6 +13,8 @@ use Modules\Recipe\Models\Category;
 
 class CategoryAdmin extends Admin
 {
+    public $columns = ['name', 'slug'];
+
     /**
      * @return string model class name
      */

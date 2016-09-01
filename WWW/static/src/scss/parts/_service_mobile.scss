@@ -1,0 +1,26 @@
+.mobile-container {
+  h1 {
+    margin: 0;
+  }
+
+  .mobile-os-list {
+    @include reset-list;
+    text-align: center;
+
+    li {
+      max-width: 100px;
+      display: inline-block;
+      margin: 0 20px;
+    }
+  }
+
+  .mobile-item {
+    margin-bottom: $block-margin;
+
+    svg {
+      width: 100%;
+      height: auto;
+      margin: $block-margin auto;
+    }
+  }
+}

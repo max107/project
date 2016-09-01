@@ -2,24 +2,27 @@
 <div class="modules">
     <div class="row">
         <div class="columns small-12">
-            {% if modules|length > 0 %}
-                <input type="search" class="modules__search" placeholder="{{ t('Search...', 'admin') }}"/>
-                <hr/>
-                <ul class="modules__list">
-                    {% for name, item in modules %}
-                        <li>
-                            {% for url in item.urls %}
-                                <div class="modules__item">
-                                    <a href="{{ url }}" rel="tooltip" title="{{ item.description }}">{{ name }}</a>
+            <input type="search" class="modules__search" placeholder="{{ t('Search...', 'admin') }}"/>
+            <hr/>
+            {% for name, items in get_modules_new_menu() %}
+                <div class="admin-index-menu">
+                    <div class="admin-index-module-name">{{ name }}</div>
+                    <ul class="small-block-grid-5">
+                        {% for route in items %}
+                            <li>
+                                <div class="admin-index-menu-item">
+                                    <div class="admin-index-menu-icon">
+                                        {% include route.icon ? route.icon : "admin/icons/unknown.svg" %}
+                                    </div>
+                                    <a href="{{ route.url }}">{{ route.name }}</a>
                                 </div>
-                                {% break %}
-                            {% endfor %}
-                        </li>
-                    {% endfor %}
-                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% else %}
                 <p>Доступные модули отсутствуют</p>
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>

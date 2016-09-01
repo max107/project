@@ -110,4 +110,37 @@ class UserModule extends Module
             ]
         ];
     }
+
+    public function getAdminMenu()
+    {
+        return [
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Users'),
+                'icon' => 'admin/icons/user.svg'
+            ],
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Groups'),
+                'icon' => 'admin/icons/users.svg'
+            ],
+            [
+                'url' => $this->reverse('admin:action', [
+                    'action' => 'list',
+                    'admin' => 'Recipe',
+                    'module' => $this->getId()
+                ]),
+                'name' => self::t('Permissions'),
+                'icon' => 'admin/icons/locked.svg'
+            ]
+        ];
+    }
 }

@@ -1,0 +1,92 @@
+.about-container {
+  .about-content {
+    @include antialias;
+    font-size: rem-calc(18px);
+    line-height: 26px;
+  }
+
+  .about-office {
+    background: {
+      color: #fff;
+      image: url(../images/about/office.png);
+      position: 50% 50%;
+      repeat: no-repeat;
+    }
+    width: auto;
+    height: 298px;
+    margin-bottom: 20px;
+  }
+
+  .client-container {
+    h2 {
+      a {
+        color: $text-color;
+      }
+    }
+  }
+
+  .project-container {
+    .project-item {
+      border-radius: $border-radius;
+      border: 1px solid $silvery;
+      padding: 10px;
+      height: 165px;
+      position: relative;
+
+      .project-title {
+        font-weight: 900;
+        font-size: rem-calc(18px);
+        margin: 0;
+        @include antialias;
+
+        a {
+          color: $text-color;
+        }
+      }
+
+      .project-description {
+        font-size: rem-calc(14px);
+        line-height: 20px;
+      }
+
+      .project-link {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+
+        .github {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .vacancy-container {
+    .vacancy-item {
+      .vacancy-title {
+        font-weight: 900;
+        font-size: rem-calc(18px);
+        margin: 0 0 10px 0;
+        @include antialias;
+
+        a {
+          color: $text-color;
+        }
+      }
+
+      .vacancy-link {
+
+      }
+
+      .vacancy-description {
+        @include antialias;
+        font-size: rem-calc(16px);
+
+        p {
+          font-size: rem-calc(16px);
+          margin: 0;
+        }
+      }
+    }
+  }
+}

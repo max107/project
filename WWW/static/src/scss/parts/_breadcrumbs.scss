@@ -1,0 +1,16 @@
+.breadcrumbs-container {
+  .breadcrumb-list {
+    @include reset-list;
+    @include clearfix;
+
+    li {
+      float: left;
+      @include antialias;
+      font-size: .95rem;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+  }
+}

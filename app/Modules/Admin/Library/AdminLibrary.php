@@ -9,6 +9,7 @@
 
 namespace Modules\Admin\Library;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Mindy\Helper\Text;
 use Mindy\Template\Library;
@@ -25,6 +26,16 @@ class AdminLibrary extends Library
             'get_admin_user_menu' => [AdminHelper::class, 'renderUser'],
             'get_admin_main_menu' => [AdminHelper::class, 'renderMain'],
             'get_module_menu' => [AdminHelper::class, 'getModuleMenu'],
+            'get_module_new_menu' => function ($id) {
+                return app()->getModule($id)->getAdminMenu();
+            },
+            'get_modules_new_menu' => function () {
+                $menu = [];
+                foreach (app()->getModules(true) as $name => $module) {
+                    $menu[$module->getName()] = $module->getAdminMenu();
+                }
+                return $menu;
+            },
             'get_modules_menu' => function () {
                 $data = [];
                 $app = Mindy::app();

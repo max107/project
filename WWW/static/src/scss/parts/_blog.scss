@@ -1,0 +1,25 @@
+.blog-container {
+
+}
+
+.blog-item {
+  margin-bottom: $block-margin;
+
+  h2 {
+    margin-bottom: $block-margin / 2;
+
+    a {
+      color: $text-color;
+    }
+  }
+
+  time {
+    @include antialias;
+    font-size: rem-calc(14px);
+    color: $text-gray-color;
+  }
+
+  .blog-content {
+    @include antialias;
+  }
+}

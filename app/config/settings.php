@@ -6,6 +6,7 @@ return [
     'basePath' => BASE_PATH,
     'modules' => [
         'Admin',
+        'Auth',
         'Recipe',
         'Mail',
         'User',

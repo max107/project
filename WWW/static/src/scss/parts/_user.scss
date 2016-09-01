@@ -1,0 +1,38 @@
+.user-container {
+  @include antialias;
+  text-align: center;
+
+  .user-avatar {
+    $size: 100px;
+    display: block;
+    width: $size;
+    height: $size;
+    margin: 0 auto $block-margin / 2;
+
+    img {
+      width: $size;
+      height: $size;
+      margin-left: -($size / 2);
+    }
+  }
+
+  .user-name {
+    font-weight: 900;
+    font-size: rem-calc(16px);
+  }
+
+  .user-post {
+    font-size: rem-calc(16px);
+    color: $text-gray-color;
+  }
+
+  .user-name, .user-post {
+    margin: 0;
+  }
+}
+
+.portfolio-view {
+  .user-post {
+    font-size: rem-calc(15px);
+  }
+}
