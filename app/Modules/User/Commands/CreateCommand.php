@@ -32,23 +32,18 @@ class CreateCommand extends ConsoleCommand
         ];
 
         $helper = $this->getHelper('question');
-        $activate = new ConfirmationQuestion('Activate user account?', false);
-        if ($activate) {
-            $attrs['is_active'] = true;
-        }
+        $activate = new ConfirmationQuestion('Activate user account? (Y/n): ', false);
+        $attrs['is_active'] = $helper->ask($input, $output, $activate);
 
         $helper = $this->getHelper('question');
-        $activate = new ConfirmationQuestion('User is superuser?', false);
-        if ($activate) {
-            $attrs['is_superuser'] = true;
-        }
+        $attrs['is_superuser'] = new ConfirmationQuestion('User is superuser? (Y/n): ', false);
 
-        $question = new Question('Password');
+        $question = new Question('Password: ');
         $question->setHidden(true);
         $question->setHiddenFallback(false);
         $password = $helper->ask($input, $output, $question);
 
-        $question = new Question('Password repeat');
+        $question = new Question('Password repeat: ');
         $question->setHidden(true);
         $question->setHiddenFallback(false);
         $passwordRepeat = $helper->ask($input, $output, $question);

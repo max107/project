@@ -122,12 +122,14 @@
                     <div class="columns small-12">
                         <ul class="tabs--list">
                             {% block tabs %}
-                                {% set menu = get_module_new_menu(module.getId()) %}
-                                {% for item in menu %}
-                                    <li class="tab--item tab--item{% if (admin and admin.classNameShort() in item.url) or item.url == request.path %}__active{% endif %}">
-                                        <a href="{{ item.url }}">{{ item.name }}</a>
-                                    </li>
-                                {% endfor %}
+                                {% if module %}
+                                    {% set menu = get_module_new_menu(module.getId()) %}
+                                    {% for item in menu %}
+                                        <li class="tab--item tab--item{% if (admin and admin.classNameShort() in item.url) or item.url == request.path %}__active{% endif %}">
+                                            <a href="{{ item.url }}">{{ item.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
                             {% endblock %}
                         </ul>
                     </div>

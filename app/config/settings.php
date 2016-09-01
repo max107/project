@@ -7,11 +7,12 @@ return [
     'modules' => [
         'Admin',
         'Auth',
-        'Recipe',
-        'Mail',
-        'User',
         'Core',
-        'Example'
+        'Example',
+        'Mail',
+        'Recipe',
+        'User',
+        'UserActions'
     ],
     'components' => [
 //        'permissions' => [
