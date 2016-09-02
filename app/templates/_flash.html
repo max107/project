@@ -1,0 +1,11 @@
+{% if request.flash.count() > 0 %}
+    <div class="row">
+        <div class="columns small-12">
+            <ul class="flash-list">
+                {% for flash in request.flash.all() %}
+                    <li class="{{ flash.class }}">{{ flash.value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

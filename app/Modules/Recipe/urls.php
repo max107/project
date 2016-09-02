@@ -9,7 +9,17 @@
 return [
     [
         'route' => '/',
-        'handler' => [\Modules\Recipe\Controller\IndexController::class, 'getIndex'],
+        'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getIndex'],
         'name' => 'index'
+    ],
+    [
+        'route' => '/recipe/list',
+        'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getList'],
+        'name' => 'list'
+    ],
+    [
+        'route' => '/{slug:c}',
+        'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getView'],
+        'name' => 'view'
     ]
 ];

@@ -1,13 +1,85 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Base template</title>
+    <meta charset="utf-8">
+    <meta name='yandex-verification' content='4280b4fe8b365ca5'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    {#{% block seo %}{{ meta(this) }}{% endblock %}#}
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
+    <link rel="apple-touch-icon" href="/favicon72px.png"/>
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 163dpi)" href="/favicon57px.png"/>
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 132dpi)" href="/favicon72px.png"/>
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 326dpi)" href="/favicon114px.png"/>
+    <link rel="stylesheet" href="/static/dist/1.0.0/css/bundle.css"/>
 </head>
 <body>
-<div class="row">
-    <div class="columns small-12">
-        {% block content %}
-        {% endblock %}
+{% include "_statistics.html" %}
+<div class="wrapper">
+    <div class="header">
+        <div class="row">
+            <div class="columns small-2">
+                <a id="logo" href="/">
+                    {% include "icons/logo.svg" %}
+                    {{ app.name }}
+                </a>
+            </div>
+            <div class="columns small-10">
+                <ul class="header-menu-list">
+                    <li>
+                        <a href="#">Рецепты</a>
+                    </li>
+                    {% for category in get_recipe_categories() %}
+                        <li>
+                            <a href="#">{{ category }}</a>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <a href="#">Из того что есть в холодильнике</a>
+                    </li>
+                    <li>
+                        <a href="#">О проекте</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block flash %}{% include "_flash.html" %}{% endblock %}
+    {% block breadcrumbs %}{% include "_breadcrumbs.html" %}{% endblock %}
+    {% block content %}{% endblock %}
+    <p class="push"></p>
+</div>
+<div class="footer">
+    <div class="row">
+        <div class="columns small-12">
+            <div class="footer-container">
+                <div class="footer-copyright">
+                    &copy; {{ time()|date('Y') }} {{ app.name }}
+                </div>
+                <ul class="footer-menu-list">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Terms</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacts</a>
+                    </li>
+                    <li>
+                        <a href="#">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+{#</noscript>#}
+<script type="text/javascript"
+        src="{% if not debug %}http://localhost:8080{% endif %}/static/dist/1.0.0/js/bundle.js"></script>
+{% block js %}{% endblock %}
 </body>
 </html>

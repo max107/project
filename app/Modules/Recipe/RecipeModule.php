@@ -8,10 +8,17 @@
 
 namespace Modules\Recipe;
 
+use function Mindy\app;
 use Mindy\Base\Module;
+use Modules\Recipe\Library\RecipeLibrary;
 
 class RecipeModule extends Module
 {
+    public static function preConfigure()
+    {
+        app()->template->addLibrary(new RecipeLibrary);
+    }
+
     public function getAdminMenu()
     {
         return [

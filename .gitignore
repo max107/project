@@ -9,3 +9,4 @@ coverage
 app/runtime/*
 !app/Modules
 node_modules
+WWW/media

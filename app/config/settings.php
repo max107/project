@@ -1,8 +1,13 @@
 <?php
 
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Cached\CachedAdapter;
+use League\Flysystem\Cached\Storage\Memory as CacheStore;
+
 define('BASE_PATH', realpath(__DIR__ . '/..'));
 
 return [
+    'name' => 'Recipe',
     'basePath' => BASE_PATH,
     'modules' => [
         'Admin',
@@ -15,6 +20,20 @@ return [
         'UserActions'
     ],
     'components' => [
+        'storage' => [
+            'class' => '\Mindy\Storage\Storage',
+            'adapters' => [
+                'default' => function () {
+                    $path = realpath(BASE_PATH . '/../WWW/media');
+                    // Create the adapter
+                    $localAdapter = new Local($path);
+                    // Create the cache store
+                    $cacheStore = new CacheStore();
+                    // Decorate the adapter
+                    return new CachedAdapter($localAdapter, $cacheStore);
+                }
+            ]
+        ],
 //        'permissions' => [
 //            'class' => '\Mindy\Permissions\PermissionManager'
 //        ],

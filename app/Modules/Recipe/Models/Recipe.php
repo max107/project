@@ -9,10 +9,17 @@
 namespace Modules\Recipe\Models;
 
 use Mindy\Orm\Fields\CharField;
+use Mindy\Orm\Fields\ImageField;
 use Mindy\Orm\Fields\ManyToManyField;
+use Mindy\Orm\Fields\SlugField;
 use Mindy\Orm\Fields\TextField;
 use Mindy\Orm\Model;
 
+/**
+ * Class Recipe
+ * @package Modules\Recipe\Models
+ * @method static \Modules\Recipe\Models\RecipeManager objects($instance = null)
+ */
 class Recipe extends Model
 {
     public static function getFields()
@@ -21,6 +28,17 @@ class Recipe extends Model
             'name' => [
                 'class' => CharField::class,
                 'verboseName' => self::t('Name')
+            ],
+            'slug' => [
+                'class' => SlugField::class,
+                'verboseName' => self::t('Slug')
+            ],
+            'image' => [
+                'class' => ImageField::class,
+                'verboseName' => self::t('Image'),
+                'sizes' => [
+                    'thumb' => [340, 260, 'method' => 'adaptiveResize']
+                ]
             ],
             'categories' => [
                 'class' => ManyToManyField::class,
@@ -43,5 +61,26 @@ class Recipe extends Model
                 'verboseName' => self::t('Product')
             ]
         ];
+    }
+
+
+    /**
+     * @param null $instance
+     * @return RecipeManager
+     */
+    public static function objectsManager($instance = null)
+    {
+        $className = get_called_class();
+        return new RecipeManager($instance ? $instance : new $className);
+    }
+
+    public function getAbsoluteUrl()
+    {
+        return $this->reverse('recipe:view', ['slug' => $this->slug]);
+    }
+
+    public function __toString()
+    {
+        return (string)$this->name;
     }
 }

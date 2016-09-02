@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="recipe-view-images-container">
+        <div class="row">
+            <div class="columns small-12">
+                <h1>{{ recipe }}</h1>
+            </div>
+            <div class="columns small-12 medium-6">
+                qwe
+            </div>
+            <div class="columns small-12 medium-6">
+                {{ recipe.description_short|safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns small-12">
+            <div class="recipe-view-content">
+                {{ recipe.description|safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe-view-related-container">
+        <div class="row">
+            <div class="columns small-12">
+                <ul class="small-block-grid-3">
+                    {% for i in range(0, 2) %}
+                        <li>
+                            {% include "recipe/_view.html" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

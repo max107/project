@@ -73,7 +73,7 @@ class UserActionsModule extends Module
             $app = Mindy::app();
             $module = $owner->getModule();
             UserLog::objects()->create([
-                'user' => $app->getUser()->getIsGuest() ? null : $app->getUser(),
+                'user' => $app->getUser()->isGuest() ? null : $app->getUser(),
                 'module' => $owner->getModuleName(),
                 'model' => $owner->classNameShort(),
                 'url' => $url,

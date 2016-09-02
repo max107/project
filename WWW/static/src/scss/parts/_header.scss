@@ -1,236 +1,43 @@
-$logoSize: 48px;
+.header {
+  padding: 20px 0;
 
-.logo {
-  @include antialias;
-  height: $logoSize;
-  margin: 0;
-  padding: 0;
-  position: relative;
-
-  .logo-span {
-    @include hide-text;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1500;
-  }
-
-  a {
-    height: $logoSize;
-    @include clearfix;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1500;
+  #logo {
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: $main-color;
+    font-weight: bold;
 
     svg {
-      height: $logoSize;
-      width: $logoSize;
-    }
+      width: 32px;
+      height: auto;
+      margin-right: 10px;
 
-    .logo-container {
-      float: left;
-    }
-
-    .logo-text {
-      float: left;
-      line-height: $logoSize;
-      margin-left: 10px;
-      color: $text-color;
-      font-weight: 900;
-      font-size: rem-calc(18px);
-    }
-
-    .rotate-holder {
-      float: left;
-      font-size: $logoSize;
-      height: $logoSize;
-      width: $logoSize;
-      color: $main-color;
-      display: block;
-      position: relative;
-      @include perspective(600px);
-
-      span {
-        width: $logoSize;
-        height: $logoSize;
-      }
-
-      .rotate-front, .rotate-hover {
-        position: absolute;
-        left: 0;
-        top: 0;
-        text-decoration: none;
-        @include transition(all .4s ease-in-out);
-        @include transform-style(preserve-3d);
-        @include backface-visibility(hidden);
-      }
-
-      .rotate-front {
-        @include transform(rotateX(0deg) rotateY(0deg));
-        z-index: 900;
-      }
-
-      .rotate-hover {
-        @include transform(rotateY(-180deg));
-        z-index: 800;
-      }
-    }
-  }
-
-  &:hover {
-    .rotate-holder {
-      .rotate-front {
-        @include transform(rotateY(180deg));
-        z-index: 900;
-      }
-
-      .rotate-hover {
-        @include transform(rotateY(0deg));
-        z-index: 1000;
+      path {
+        fill: $main-color
       }
     }
   }
 }
 
-.header {
-  padding: 20px 0;
-  margin-bottom: $block-margin;
-  box-shadow: 0 1px 0 rgba($text-color, .1);
+.header-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
 
-  .header-menu-services {
-    list-style: none;
-    margin: 0;
-    padding: 10px 0 0 0;
-    border-top: 2px solid $main-color;
-    position: relative;
-
-    &:after, &:before {
-      bottom: 100%;
-      left: 140px;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-    }
-    &:after {
-      border-color: rgba(255, 255, 255, 0);
-      border-bottom-color: #fff;
-      border-width: 8px;
-      margin-left: -8px;
-    }
-    &:before {
-      border-color: rgba(245, 137, 31, 0);
-      border-bottom-color: #f5891f;
-      border-width: 11px;
-      margin-left: -11px;
+  li {
+    &:not(:last-child) {
+      margin-right: 15px;
     }
 
-    li {
-      padding: 0;
-      margin: 0;
-
-      a {
-        color: $text-color;
-        display: block;
-
-        &.active {
-          color: #dc7e16;
-        }
-
-        &:hover {
-          color: #dc7e16;
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
-  .header-menu {
-    @include clearfix;
-    padding: 0 0 10px 0;
-    margin: 0;
-    list-style: none;
-
-    @media #{$small-only} {
-      display: none;
-    }
-
-    li {
-      float: left;
-
-      &:not(:last-child) {
-        margin-right: 15px;
-      }
-
-      a {
-        font-weight: 400;
-        border-radius: $border-radius;
-        transition: border-color .2s ease;
-        text-decoration: none;
-        color: $text-color;
-
-        &.active, &:hover {
-          color: #dc7e16;
-        }
-
-        &:hover:not(.active) {
-          border-color: rgba($main-color, 0.5);
-        }
-
-        @media #{$medium-up} {
-          font-size: rem-calc(16px);
-        }
-
-        @media #{$large-up} {
-          font-size: rem-calc(16px);
-        }
-
-        @media #{$screen} and (min-width: 1200px) {
-          font-size: rem-calc(18px);
-        }
-      }
-    }
-  }
-
-  .header-contact {
-    @include antialias;
-
-    p {
-      margin: 0 0 5px 0;
-      font-size: rem-calc(14px);
-    }
-
-    &, a:not(.button) {
-      color: $text-gray-color;
+    a {
+      display: block;
+      color: $text-color;
       text-decoration: none;
 
       &:hover {
         color: $main-color;
-      }
-    }
-  }
-
-  .mobile-menu-container {
-    text-align: center;
-    line-height: $logoSize;
-
-    svg {
-      $size: 32px;
-      margin: ($logoSize - $size) / 2 auto 0;
-      width: $size;
-      height: $size;
-
-      path {
-        fill: $text-gray-color;
       }
     }
   }

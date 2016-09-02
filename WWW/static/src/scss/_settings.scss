@@ -1,5 +1,20 @@
 @import "mindy/functions";
-$row-width: rem-calc(1280);
-$body-font-family: Lato, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
+
+$body-background-color: #fff !default;
+$text-color: #353535 !default;
+$text-gray-color: #898989 !default;
+$link-color: #f5891f !default;
+$main-color: #f5891f !default;
+$defaultTransition: all .2s ease;
+$retina: "only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min--moz-device-pixel-ratio: 2),
+      only screen and ( -o-min-device-pixel-ratio: 2/1),
+      only screen and ( min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx)";
+$border-radius: 4px;
+
+$row-width: rem-calc(1008);
+$body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
 $block-margin: 45px;
 $border-size: 2px;
