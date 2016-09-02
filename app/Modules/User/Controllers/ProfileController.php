@@ -35,7 +35,7 @@ class ProfileController extends FrontendController
     {
         $app = Mindy::app();
         $user = $app->getUser();
-        if ($user->getIsGuest()) {
+        if ($user->isGuest()) {
             $this->error(403);
         }
 
@@ -47,7 +47,7 @@ class ProfileController extends FrontendController
     public function actionUpdate()
     {
         $user = Mindy::app()->getUser();
-        if ($user->getIsGuest()) {
+        if ($user->isGuest()) {
             $this->error(403);
         }
 
@@ -66,6 +66,9 @@ class ProfileController extends FrontendController
     public function getProfile()
     {
         $user = app()->auth->getUser();
+        if ($user->isGuest()) {
+            $this->error(403);
+        }
         echo $this->render('user/profile/view.html', [
             'model' => $user
         ]);

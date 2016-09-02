@@ -146,9 +146,9 @@ class Rule
         foreach ($this->users as $u) {
             if ($u === '*') {
                 return true;
-            } elseif ($u === '?' && $user->getIsGuest()) {
+            } elseif ($u === '?' && $user->isGuest()) {
                 return true;
-            } elseif ($u === '@' && !$user->getIsGuest()) {
+            } elseif ($u === '@' && !$user->isGuest()) {
                 return true;
             } elseif (!strcasecmp($u, $user->username)) {
                 return true;

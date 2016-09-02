@@ -39,6 +39,18 @@ abstract class UserBase extends Model implements IUser
         'is_active'
     ];
 
+    /**
+     * @return array
+     */
+    public function getSafeAttributes() : array
+    {
+        $attrs = [];
+        foreach (self::TRUSTED_FIELDS as $name) {
+            $attrs[$name] = $this->{$name};
+        }
+        return $attrs;
+    }
+
     public function isGuest() : bool
     {
         return $this->id === null;
@@ -151,7 +163,7 @@ abstract class UserBase extends Model implements IUser
 
     public function getIp()
     {
-        return Mindy::app()->request->http->getUserHostAddress();
+        return Mindy::app()->http->request->getUserHostAddress();
     }
 
     public function __toString()

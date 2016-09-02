@@ -8,6 +8,7 @@
 
 namespace Modules\Auth\Forms;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Mindy\Form\Fields\CharField;
 use Mindy\Form\Fields\PasswordField;
@@ -55,6 +56,7 @@ class LoginForm extends Form
             'username' => $username,
             'password' => $password
         ]);
+
         if (is_array($state)) {
             $this->addErrors($state);
         }

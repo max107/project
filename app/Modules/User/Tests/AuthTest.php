@@ -32,11 +32,11 @@ class AuthTest extends UserBaseTest
         $password = 'bar';
         $user = User::objects()->createUser($username, $password, 'admin@admin.com');
 
-        $this->assertTrue($auth->getIsGuest());
+        $this->assertTrue($auth->isGuest());
         $this->assertTrue($auth->login($user));
-        $this->assertFalse($auth->getIsGuest());
+        $this->assertFalse($auth->isGuest());
 
         $auth->logout();
-        $this->assertTrue($auth->getIsGuest());
+        $this->assertTrue($auth->isGuest());
     }
 }

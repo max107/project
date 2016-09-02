@@ -3,5 +3,7 @@
 {% block content %}
     <h1>Hello world</h1>
 
-    <a href="{% url 'auth:login' %}">Login</a>
+    {% if user.isGuest %}
+        <a href="{% url 'auth:login' %}">Login</a>
+    {% endif %}
 {% endblock %}

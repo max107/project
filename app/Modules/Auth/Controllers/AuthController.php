@@ -8,6 +8,7 @@
 
 namespace Modules\Auth\Controllers;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Modules\Auth\AuthModule;
 use Modules\Auth\Forms\LoginForm;
@@ -19,8 +20,8 @@ class AuthController extends FrontendController
     {
         $request = $this->getRequest();
 
-        $app = Mindy::app();
-        if ($app->getUser()->isGuest() === false) {
+        $app = app();
+        if ($app->auth->getUser()->isGuest() === false) {
             if (isset($_GET['_next'])) {
                 $request->redirect($_GET['_next']);
             } else {
