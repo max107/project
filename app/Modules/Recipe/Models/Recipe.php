@@ -8,7 +8,9 @@
 
 namespace Modules\Recipe\Models;
 
+use Mindy\Orm\Fields\BooleanField;
 use Mindy\Orm\Fields\CharField;
+use Mindy\Orm\Fields\DateTimeField;
 use Mindy\Orm\Fields\ImageField;
 use Mindy\Orm\Fields\ManyToManyField;
 use Mindy\Orm\Fields\SlugField;
@@ -49,16 +51,22 @@ class Recipe extends Model
                 'class' => TextField::class,
                 'verboseName' => self::t('Description')
             ],
+            'is_published' => [
+                'class' => BooleanField::class,
+                'verboseName' => self::t('Is published')
+            ],
+            'published_at' => [
+                'class' => DateTimeField::class,
+                'editable' => false,
+                'verboseName' => self::t('Published at')
+            ],
             'description_short' => [
                 'class' => TextField::class,
                 'verboseName' => self::t('Description short')
             ],
-            'products' => [
-                'class' => ManyToManyField::class,
-                'through' => ProductThrough::class,
-                'throughLink' => ['recipe_id', 'product_id'],
-                'modelClass' => Product::class,
-                'verboseName' => self::t('Product')
+            'ingridient' => [
+                'class' => TextField::class,
+                'verboseName' => self::t('Ingridients')
             ]
         ];
     }
@@ -82,5 +90,15 @@ class Recipe extends Model
     public function __toString()
     {
         return (string)$this->name;
+    }
+
+    public function beforeSave($owner, $isNew)
+    {
+        if ($isNew) {
+            if (empty($owner->published_at)) {
+                $adapter = $this->getDb()->getAdapter();
+                $owner->published_at = $adapter->getDateTime();
+            }
+        }
     }
 }
