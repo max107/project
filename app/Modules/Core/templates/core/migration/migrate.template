@@ -2,10 +2,12 @@
 
 namespace {{ namespace|safe }};
 
-use Mindy\Query\Migration;
+use Mindy\QueryBuilder\Migration;
 
 class {{ name|safe }} extends Migration
 {
+    protected $db = '{{ db }}';
+
     public function safeUp()
     {
 {{ safeUp|safe }}

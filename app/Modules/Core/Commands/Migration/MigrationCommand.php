@@ -11,7 +11,7 @@
  * @date 08/01/15 16:23
  */
 
-namespace Modules\Core\Commands;
+namespace Modules\Core\Commands\Migration;
 
 use Mindy\Base\Mindy;
 use Mindy\Console\ConsoleCommand;
@@ -20,6 +20,9 @@ use Mindy\Orm\Migration;
 use Mindy\Orm\Sync;
 use Mindy\Helper\Traits\RenderTrait;
 use Modules\Core\Models\Migration as ModelMigration;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationCommand extends ConsoleCommand
 {
@@ -28,6 +31,10 @@ class MigrationCommand extends ConsoleCommand
     public function configure()
     {
         $this->setName('migration');
+        $this->addOption('module', '', InputOption::VALUE_REQUIRED, 'Module id', '');
+        $this->addOption('model', '', InputOption::VALUE_REQUIRED, 'Model class', '');
+        $this->addOption('db', '', InputOption::VALUE_OPTIONAL, 'Database component id', '');
+        $this->addOption('name', '', InputOption::VALUE_OPTIONAL, 'Name', '');
     }
 
     protected function isToUpMigration($module, $model, $fileName = '', $db = null)
@@ -52,25 +59,26 @@ class MigrationCommand extends ConsoleCommand
         }
     }
 
-    public function actionMigrate($module, $model = null, $name = '', $db = null)
+    public function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($model === null) {
-            $models = Mindy::app()->getModule($module)->getModels();
-        } else {
-            $className = strtr("\\Modules\\{module}\\Models\\{model}", [
-                '{module}' => ucfirst($module),
-                '{model}' => ucfirst($model)
-            ]);
+        $module = ucfirst($input->getOption('module'));
+        $model = ucfirst($input->getOption('model'));
+        $name = $input->getOption('name');
+        $db = $input->getOption('db');
 
-            if (class_exists($className) === false) {
-                echo "Model not found in namespace: " . $className . PHP_EOL;
-                exit(1);
-            }
+        $className = strtr("\\Modules\\{module}\\Models\\{model}", [
+            '{module}' => ucfirst($module),
+            '{model}' => ucfirst($model)
+        ]);
 
-            $models = [new $className];
+        if (class_exists($className) === false) {
+            $output->writeln("Model not found in namespace: " . $className);
+            return;
         }
 
-        $path = Alias::get('App.Modules.' . ucfirst($module) . '.Migrations');
+        $models = [new $className];
+
+        $path = Alias::get('Modules.' . ucfirst($module) . '.Migrations');
         if (!is_dir($path)) {
             echo "Migrations not found" . PHP_EOL;
             die(1);
@@ -135,84 +143,7 @@ class MigrationCommand extends ConsoleCommand
                     break;
                 }
             }
-            echo "Complete" . PHP_EOL;
+            $output->writeln("Complete");
         }
-    }
-
-    public function actionSchemamigration($module, $model = null, $auto = true, $db = null)
-    {
-        if ($model === null) {
-            $models = Mindy::app()->getModule($module)->getModels();
-        } else {
-            $className = strtr("\\Modules\\{module}\\Models\\{model}", [
-                '{module}' => ucfirst($module),
-                '{model}' => ucfirst($model)
-            ]);
-
-            if (class_exists($className) === false) {
-                echo "Model not found in namespace: " . $className . PHP_EOL;
-                exit(1);
-            }
-
-            $models = [new $className];
-        }
-
-        $path = Alias::get('App.Modules.' . ucfirst($module) . '.Migrations');
-        if (!is_dir($path)) {
-            mkdir($path);
-        }
-
-        foreach ($models as $model) {
-            $migration = new Migration($model, $path);
-            $migration->setDb($db);
-
-            if ($migration->hasChanges() == false) {
-                echo "Error: " . $migration->getName() . ". No changes." . PHP_EOL;
-                die(1);
-            }
-
-            $namespace = strtr("Modules\\{module}\\Migrations", [
-                '{module}' => ucfirst($module)
-            ]);
-
-            if ($auto) {
-                $safeUp = $migration->getSafeUp();
-                $safeDown = $migration->getSafeDown();
-            } else {
-                $safeUp = '';
-                $safeDown = '';
-            }
-
-            if ($migration->save()) {
-                // TODO $db
-                $fileName = $path . DIRECTORY_SEPARATOR . $migration->getName();
-                $source = $this->generateTemplate($namespace, $migration->getName(), $safeUp, $safeDown);
-                file_put_contents($fileName . '.php', $source);
-
-                list(, $timestamp) = explode('_', $migration->getName());
-
-                $model = new ModelMigration;
-
-                $sync = new Sync($model);
-                if ($sync->hasTable($model)) {
-                    $sync->create();
-                }
-
-                echo "Migration created: " . $migration->getName() . PHP_EOL;
-            } else {
-                echo "Failed to save migration: " . $migration->getName() . ". No changes." . PHP_EOL;
-                die(1);
-            }
-        }
-    }
-
-    public function generateTemplate($namespace, $name, $safeUp = '', $safeDown = '')
-    {
-        return self::renderTemplate('core/migration/migrate.template', [
-            'namespace' => $namespace,
-            'name' => $name,
-            'safeUp' => $safeUp,
-            'safeDown' => $safeDown,
-        ]);
     }
 }

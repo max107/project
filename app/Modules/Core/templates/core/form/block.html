@@ -18,13 +18,13 @@
             <fieldset>
                 <legend>{{ fieldset }}</legend>
                 {% for field in fields %}
-                    <div class="form-block">{{ form.getField(field).render()|raw }}</div>
+                    <div class="form-row">{{ form.getField(field).render()|raw }}</div>
                 {% endfor %}
             </fieldset>
         {% endif %}
     {% endfor %}
 {% else %}
     {% for field in form.getRenderFields() %}
-        <div class="form-block">{{ field.render()|raw }}</div>
+        <div class="form-row">{{ field.render()|raw }}</div>
     {% endfor %}
 {% endif %}
