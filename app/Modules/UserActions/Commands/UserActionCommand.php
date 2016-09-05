@@ -13,16 +13,23 @@ use DateTime;
 use Mindy\Console\ConsoleCommand;
 use Modules\Core\Components\ParamsHelper;
 use Modules\UserActions\Models\UserLog;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class UserActionCommand extends ConsoleCommand
 {
-    public function actionCleanup()
+    public function configure()
+    {
+        $this->setName('user_action');
+    }
+
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         $days = (int)ParamsHelper::get('UserActions.UserLog.count');
         $count = UserLog::objects()->filter([
             'created_at__gte' => new DateTime('+' . $days . ' days')
         ])->delete();
 
-        echo 'Removed ' . $count . ' records' . PHP_EOL;
+        $output->writeln('Removed ' . $count . ' records');
     }
 }

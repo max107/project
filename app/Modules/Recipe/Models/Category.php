@@ -32,4 +32,9 @@ class Category extends TreeModel
     {
         return (string)$this->name;
     }
+
+    public function getAbsoluteUrl()
+    {
+        return $this->reverse('recipe:list', ['slug' => $this->slug]);
+    }
 }

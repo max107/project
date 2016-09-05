@@ -13,7 +13,7 @@ return [
         'name' => 'index'
     ],
     [
-        'route' => '/recipe/list',
+        'route' => '/recipe/{slug:c}',
         'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getList'],
         'name' => 'list'
     ],

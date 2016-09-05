@@ -38,7 +38,6 @@
       color: $text-color;
       font-weight: bold;
       text-decoration: none;
-      @include ellipsis;
     }
 
     .recipe-list-item-footer {
@@ -64,6 +63,38 @@
       .recipe-list-item-cal {
         color: $silvery
       }
+    }
+  }
+}
+
+.recipe-view-ingridients-container {
+  h3 {
+    @include antialias;
+    font-size: 2rem;
+  }
+
+  font-size: .95rem;
+}
+
+.recipe-view-instructions-container {
+  @include antialias;
+
+  h3 {
+    @include antialias;
+    font-size: 2rem;
+  }
+
+  .recipe-view-instructions-step {
+    font-weight: bold;
+  }
+
+  .row {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    padding-bottom: 20px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $clouds;
     }
   }
 }

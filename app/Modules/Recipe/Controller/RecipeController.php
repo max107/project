@@ -48,8 +48,20 @@ class RecipeController extends Controller
             $this->error(404);
         }
 
+        $qs = Recipe::objects()
+            ->published()
+            ->exclude(['id' => $recipe->id])
+            ->limit(6)
+            ->order(['?']);
+
+        $categoryIds = $recipe->categories->valuesList(['id'], true);
+        if (empty($categoryIds) === false) {
+            $qs->filter(['categories__id__in' => $categoryIds]);
+        }
+
         echo $this->render('recipe/view.html', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'related' => $qs->all()
         ]);
     }
 }
