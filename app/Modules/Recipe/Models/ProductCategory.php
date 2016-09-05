@@ -8,8 +8,23 @@
 
 namespace Modules\Recipe\Models;
 
+use Mindy\Orm\Fields\CharField;
+use Mindy\Orm\Model;
 
-class ProductCategory
+class ProductCategory extends Model
 {
+    public static function getFields()
+    {
+        return [
+            'name' => [
+                'class' => CharField::class,
+                'verboseName' => self::t('Name')
+            ],
+        ];
+    }
 
+    public function __toString()
+    {
+        return (string)$this->name;
+    }
 }

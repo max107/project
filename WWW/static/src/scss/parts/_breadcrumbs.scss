@@ -5,11 +5,16 @@
 
     li {
       float: left;
-      @include antialias;
       font-size: .95rem;
+      color: $asbestos;
 
       &:not(:last-child) {
         margin-right: 5px;
+      }
+
+      a {
+        color: $text-color;
+        text-decoration: none;
       }
     }
   }

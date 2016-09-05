@@ -27,7 +27,7 @@
                     {{ app.name }}
                 </a>
             </div>
-            <div class="columns small-10">
+            <div class="columns small-8">
                 <ul class="header-menu-list">
                     <li>
                         <a href="#">Рецепты</a>
@@ -44,6 +44,10 @@
                         <a href="#">О проекте</a>
                     </li>
                 </ul>
+            </div>
+            <div class="columns small-2">
+                <a href="{% url 'auth:login' %}">Авторизация</a>
+                <a href="{% url 'auth:registration' with ['type' => 'email'] %}">Регистрация</a>
             </div>
         </div>
     </div>

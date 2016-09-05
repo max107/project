@@ -1,0 +1,13 @@
+<ul class="user-sidebar-list">
+    <li>
+        {% url 'recipe:favorite' as favorite %}
+        <a href="{{ favorite }}" class="{{ favorite in request.path ? 'active' : '' }}">Избранное</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="{% url 'auth:change_password' %}">{{ t('Change password', 'user') }}</a>
+    </li>
+    <li>
+        <a href="{% url 'auth:logout' %}">{{ t('Logout', 'user') }}</a>
+    </li>
+</ul>

@@ -8,10 +8,15 @@
 @import "parts/header";
 @import "parts/recipe";
 @import "parts/button";
-@import "parts/flash";
+@import "parts/form";
 @import "parts/index";
 @import "parts/footer";
 @import "parts/breadcrumbs";
 @import "parts/tabs";
 @import "parts/pager";
 @import "parts/flash";
+@import "parts/user";
+
+#{$headings} {
+  @include antialias;
+}

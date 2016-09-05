@@ -86,6 +86,12 @@ class Recipe extends Model
             'ingridient' => [
                 'class' => TextField::class,
                 'verboseName' => self::t('Ingridients')
+            ],
+            'hint' => [
+                'class' => IntField::class,
+                'verboseName' => self::t('Hint'),
+                'editable' => false,
+                'default' => 0
             ]
         ];
     }
@@ -118,6 +124,20 @@ class Recipe extends Model
                 $adapter = $this->getDb()->getAdapter();
                 $owner->published_at = $adapter->getDateTime();
             }
+        }
+    }
+
+    public function addToShoppingList()
+    {
+        foreach ($this->ingridients->all() as $ingridient) {
+
+        }
+    }
+
+    public function removeFromShoppingList()
+    {
+        foreach ($this->ingridients->all() as $ingridient) {
+
         }
     }
 }

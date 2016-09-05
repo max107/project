@@ -5,7 +5,7 @@
         <div class="columns small-12">
             <h2>Новые</h2>
             <ul class="small-block-grid-4">
-                {% for recipe in recipes %}
+                {% for recipe in new_recipes %}
                     <li>
                         {% include "recipe/_view.html" %}
                     </li>
@@ -14,7 +14,7 @@
 
             <h2>Популярные</h2>
             <ul class="small-block-grid-4">
-                {% for recipe in recipes %}
+                {% for recipe in popular_recipes %}
                     <li>
                         {% include "recipe/_view.html" %}
                     </li>

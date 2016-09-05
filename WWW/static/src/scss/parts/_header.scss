@@ -1,11 +1,15 @@
 .header {
   padding: 20px 0;
+  background: {
+    color: $clouds;
+  }
 
   #logo {
     font-size: 1.6rem;
     text-decoration: none;
     color: $main-color;
     font-weight: bold;
+    @include hide-text;
 
     svg {
       width: 32px;

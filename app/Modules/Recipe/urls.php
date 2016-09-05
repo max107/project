@@ -21,5 +21,26 @@ return [
         'route' => '/{slug:c}',
         'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getView'],
         'name' => 'view'
+    ],
+    [
+        'route' => '/user/favorite',
+        'handler' => [\Modules\Recipe\Controller\RecipeController::class, 'getFavorite'],
+        'name' => 'favorite'
+    ],
+    
+    '/shopping_list' => [
+        'namespace' => 'shopping_list',
+        'routes' => [
+            [
+                'route' => '/add',
+                'handler' => [\Modules\Recipe\Controller\ShoppingListController::class, 'postAdd'],
+                'name' => 'add'
+            ],
+            [
+                'route' => '/',
+                'handler' => [\Modules\Recipe\Controller\ShoppingListController::class, 'getView'],
+                'name' => 'list'
+            ],
+        ]
     ]
 ];

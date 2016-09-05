@@ -1,0 +1,59 @@
+.form-errors {
+  list-style: none;
+  padding: 10px;
+  margin: 20px 0;
+  background: {
+    color: $pomegranate;
+  }
+
+  li {
+    color: #fff;
+    font-size: .85rem;
+  }
+}
+
+form {
+  label {
+    display: block;
+    font-size: .9rem;
+    cursor: pointer;
+  }
+
+  .form-hint-text {
+    font-size: .85rem;
+    color: $asbestos;
+    margin: 0;
+  }
+
+  .form-row {
+    margin-bottom: 10px;
+  }
+
+  #{$text-inputs} {
+    width: 100%;
+    border: 2px solid $silvery;
+    outline: none;
+    height: 32px;
+    padding: 5px 10px;
+    transition: border-color .2s ease;
+
+    &:active, &:focus {
+      border-color: $main-color;
+    }
+
+    &.error {
+      border-color: $pomegranate;
+    }
+  }
+
+  .form-input-errors {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+
+    li {
+      font-size: .85rem;
+      color: $pomegranate;
+    }
+  }
+}

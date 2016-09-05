@@ -30,6 +30,9 @@ class RegistrationForm extends Form
                 'class' => CharField::class,
                 'label' => AuthModule::t('Username'),
                 'required' => true,
+                'html' => [
+                    'required'
+                ],
                 'validators' => [
                     function ($value) {
                         if (User::objects()->filter(['username' => $value])->count() > 0) {
@@ -43,6 +46,9 @@ class RegistrationForm extends Form
                 'class' => EmailField::class,
                 'label' => AuthModule::t('Email'),
                 'required' => true,
+                'html' => [
+                    'required'
+                ],
                 'validators' => [
                     function ($value) {
                         if (User::objects()->filter(['email' => $value])->count() > 0) {

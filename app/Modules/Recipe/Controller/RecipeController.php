@@ -16,15 +16,21 @@ class RecipeController extends Controller
 {
     public function getIndex()
     {
-        $qs = Recipe::objects()
+        $newQs = Recipe::objects()
             ->published()
             ->order(['-published_at']);
+        $newPager = new Pagination($newQs);
 
-        $pager = new Pagination($qs);
+        $popularQs = Recipe::objects()
+            ->published()
+            ->order(['hint']);
+        $popularPager = new Pagination($popularQs);
         
         echo $this->render('recipe/index.html', [
-            'pager' => $pager,
-            'recipes' => $pager->paginate()
+            'new_pager' => $newPager,
+            'new_recipes' => $newPager->paginate(),
+            'popular_pager' => $popularPager,
+            'popular_recipes' => $popularPager->paginate()
         ]);
     }
 
@@ -48,6 +54,9 @@ class RecipeController extends Controller
             $this->error(404);
         }
 
+        $recipe->hint += 1;
+        $recipe->save(['hint']);
+
         $qs = Recipe::objects()
             ->published()
             ->exclude(['id' => $recipe->id])
@@ -62,6 +71,13 @@ class RecipeController extends Controller
         echo $this->render('recipe/view.html', [
             'recipe' => $recipe,
             'related' => $qs->all()
+        ]);
+    }
+
+    public function getFavorite()
+    {
+        echo $this->render('recipe/favorite/list.html', [
+
         ]);
     }
 }

@@ -1,4 +1,13 @@
 .button {
+  padding: 5px 10px;
+}
+
+[type="submit"] {
+  padding: 7px 10px;
+}
+
+.button,
+[type="submit"] {
   box-sizing: content-box;
   background: {
     color: $main-color;
@@ -7,7 +16,6 @@
   color: #fff;
   font-weight: 700;
   @include antialias;
-  padding: 5px 10px;
   border-radius: $border-radius;
   text-decoration: none;
   border: $border-size solid transparent;
