@@ -3,13 +3,13 @@
 {% block content %}
     <div class="row">
         <div class="columns small-12">
-            <h1>{{ t('Login', 'auth') }}</h1>
+            <h1>{{ t('modules.Auth', 'Login') }}</h1>
 
             <form action="{% url 'auth:login' %}" method="post">
                 {% csrf_token %}
                 {{ form.render()|safe }}
                 <div class="form-row">
-                    <input type="submit" value="{{ t('Login', 'auth') }}">
+                    <input type="submit" value="{{ t('modules.Auth', 'Login') }}">
                 </div>
             </form>
         </div>

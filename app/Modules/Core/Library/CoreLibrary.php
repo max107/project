@@ -25,48 +25,13 @@ class CoreLibrary extends Library
     public function getHelpers()
     {
         return [
-            'basename' => 'basename',
-            'strtok' => 'strtok',
-            'locale' => function () {
-                return app()->locale;
-            },
-            'locale_date' => function ($timestamp, $format = 'd MMMM yyyy') {
-                return app()->locale->getDateFormatter()->format($format, $timestamp);
-            },
-            'method_exists' => function ($obj, $name) {
-                return method_exists($obj, $name);
-            },
             'd' => 'd',
-            'is_file' => 'is_file',
-            'time' => 'time',
-            'strtotime' => 'strtotime',
-            't' => function ($text, $category, $params = []) {
-                if ($category !== 'app' && !strpos($category, '.')) {
-                    $category .= '.main';
-                }
-                $findCategory = explode('.', $category);
-                $moduleNameRaw = ucfirst($findCategory[0]);
-                if (Mindy::app()->hasModule($moduleNameRaw)) {
-                    $module = Mindy::app()->getModule($moduleNameRaw);
-                    $moduleName = get_class($module) . '.' . $findCategory[1];
-                    return Mindy::t($moduleName, $text, $params);
-                } else {
-                    return $text;
-                }
+            'dump' => 'dump',
+            'debug' => 'debug',
+            't' => function ($domain, $message, array $parameters = [], $locale = null) : string {
+                return app()->t($domain, $message, $parameters, $locale);
             },
-            'get_static_version' => function () {
-                $filePath = Alias::get('www.static') . '/package.json';
-                $content = file_get_contents($filePath);
-                $data = Json::decode($content);
-                return $data['version'];
-            },
-            'base64_encode' => 'base64_encode',
-            'base64_decode' => 'base64_decode',
-            'ucfirst' => ['\Mindy\Helper\Text', 'mbUcfirst'],
             'param' => ['\Modules\Core\Components\ParamsHelper', 'get'],
-            'humanizeDateTime' => ['\Modules\Core\Components\Humanize', 'humanizeDateTime'],
-            'humanizeSize' => ['\Modules\Core\Components\Humanize', 'humanizeSize'],
-            'humanizePrice' => ['\Modules\Core\Components\Humanize', 'numToStr'],
             'limit' => ['\Mindy\Helper\Text', 'limit'],
         ];
     }

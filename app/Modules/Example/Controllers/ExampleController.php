@@ -16,7 +16,7 @@ class ExampleController extends Controller
     public function getIndex()
     {
         $models = Category::objects()->all();
-        echo $this->renderTemplate('example/index.html', [
+        echo $this->render('example/index.html', [
             'models' => $models
         ]);
     }

@@ -7,7 +7,7 @@
         {% csrf_token %}
         {{ form.render()|safe }}
         <div class="form-row">
-            <input type="submit" value="{{ t('Login', 'auth') }}">
+            <input type="submit" value="{{ t('Login', [], 'modules.Auth') }}">
         </div>
     </form>
 {% endblock %}

@@ -28,12 +28,12 @@ class UserPermission extends Model
             'user' => [
                 'class' => ForeignField::class,
                 'modelClass' => User::class,
-                'verboseName' => self::t("User"),
+                'verboseName' => self::t('modules.User', "User"),
             ],
             'permission' => [
                 'class' => ForeignField::class,
                 'modelClass' => Permission::class,
-                'verboseName' => self::t("Permission"),
+                'verboseName' => self::t('modules.User', "Permission"),
             ]
         ];
     }

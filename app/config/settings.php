@@ -7,7 +7,7 @@ use League\Flysystem\Cached\Storage\Memory as CacheStore;
 define('BASE_PATH', realpath(__DIR__ . '/..'));
 
 return [
-    'name' => 'Recipe',
+    'name' => 'My App',
     'basePath' => BASE_PATH,
     'modules' => require(__DIR__ . '/modules.php'),
     'components' => [
@@ -30,11 +30,15 @@ return [
 //        ],
         'locale' => [
             'class' => '\Mindy\Translator\Locale',
-            'modulesPath' => BASE_PATH . '/Modules'
+            'modulesPath' => BASE_PATH . '/Modules',
+            'locale' => 'ru_RU'
         ],
         'auth' => [
             'class' => '\Mindy\Auth\AuthProvider',
             'userClass' => '\Modules\User\Models\User',
+            'userProvider' => [
+                'class' => '\Modules\User\Provider\UserProvider'
+            ],
             'passwordHashers' => [
                 'mindy' => '\Mindy\Auth\PasswordHasher\MindyPasswordHasher'
             ],
@@ -42,35 +46,30 @@ return [
                 'local' => ['class' => '\Mindy\Auth\Strategy\LocalStrategy']
             ]
         ],
-        'db' => function () {
-            $databases = [
+        'db' => [
+            'class' => '\Mindy\QueryBuilder\ConnectionManager',
+            'connections' => [
                 'default' => [
-                    'dbname' => BASE_PATH . '/sqlite.db',
-                    'host' => 'localhost',
+                    'path' => BASE_PATH . '/sqlite.db',
                     'driver' => 'pdo_sqlite',
                 ]
-            ];
-            return \Mindy\Creator\Creator::createObject(['class' => '\Mindy\QueryBuilder\ConnectionManager'], $databases);
-        },
+            ]
+        ],
         'finder' => [
             'class' => '\Mindy\Finder\Finder',
             'finders' => [
-                ['class' => '\Mindy\Finder\Finder\TemplateFinder', 'basePath' => BASE_PATH],
                 /*
-                [
-                    'class' => '\Mindy\Finder\Finder\ThemeTemplateFinder',
-                    'theme' => function () {
-                        static $isMobile = false;
-                        return $isMobile ? 'mobile' : 'default';
-                    }
-                ],
+                ['class' => '\Mindy\Finder\TemplateFinder\ThemeTemplateFinder', 'theme' => function () {
+                    return 'default';
+                }],
                 */
-                ['class' => '\Mindy\Finder\Finder\AppTemplateFinder', 'basePath' => BASE_PATH . '/Modules'],
+                ['class' => '\Mindy\Finder\TemplateFinder\TemplateFinder', 'basePath' => BASE_PATH],
+                ['class' => '\Mindy\Finder\TemplateFinder\AppTemplateFinder', 'basePath' => BASE_PATH . '/Modules'],
             ],
         ],
         'template' => [
             'class' => '\Mindy\Template\Renderer',
-            'mode' => \Mindy\Template\Renderer::RECOMPILE_NORMAL,
+            'mode' => \Mindy\Template\Renderer::RECOMPILE_NEVER,
             'target' => BASE_PATH . '/runtime/templates',
         ],
         'http' => [
@@ -78,7 +77,7 @@ return [
             'session' => [
                 'class' => '\Mindy\Session\Session',
                 'handler' => [
-                    'class' => '\Mindy\Session\Adapter\NativeSessionAdapter'
+                    'class' => '\Mindy\Session\Handler\NativeSessionHandler'
                 ],
             ],
             'middleware' => require(__DIR__ . '/middleware.php'),

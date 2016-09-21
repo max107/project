@@ -23,30 +23,18 @@
         <div class="row">
             <div class="columns small-2">
                 <a id="logo" href="/">
-                    {% include "icons/logo.svg" %}
                     {{ app.name }}
                 </a>
             </div>
             <div class="columns small-8">
                 <ul class="header-menu-list">
                     <li>
-                        <a href="#">Рецепты</a>
-                    </li>
-                    {% for category in get_recipe_categories() %}
-                        <li>
-                            <a href="{{ category.getAbsoluteUrl() }}">{{ category }}</a>
-                        </li>
-                    {% endfor %}
-                    <li>
-                        <a href="#">Из того что есть в холодильнике</a>
-                    </li>
-                    <li>
-                        <a href="#">О проекте</a>
+                        <a href="#">Menu item</a>
                     </li>
                 </ul>
             </div>
             <div class="columns small-2">
-                <a href="{% url 'auth:login' %}">Авторизация</a>
+                <a href="{% url 'auth:login' %}">{{ t('modules.Auth', 'Auth') }}</a>
                 <a href="{% url 'auth:registration' with ['type' => 'email'] %}">Регистрация</a>
             </div>
         </div>

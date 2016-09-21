@@ -2,17 +2,15 @@
 
 namespace Modules\Core\Commands;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Mindy\Console\ConsoleCommand;
-use Mindy\Helper\Console;
 use Mindy\Orm\Sync;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- *
- *
  * All rights reserved.
  *
  * @author Falaleev Maxim
@@ -58,13 +56,18 @@ class SyncCommand extends ConsoleCommand
         return array_values($models);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $module = $input->getOption('module');
         $connection = $input->getOption('connection');
 
         $models = $this->getModels($output, $module);
-        $connection = Mindy::app()->db->getDb($connection);
+        $connection = app()->db->getConnection($connection);
         $sync = new Sync($models, $connection);
         $created = $sync->create();
 

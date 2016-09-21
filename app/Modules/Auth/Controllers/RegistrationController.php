@@ -8,7 +8,7 @@
 
 namespace Modules\Auth\Controllers;
 
-use Mindy\Helper\Creator;
+use Mindy\Creator\Creator;
 use Modules\Auth\Forms\RegistrationForm;
 use Modules\Core\Controllers\FrontendController;
 
@@ -23,7 +23,7 @@ class RegistrationController extends FrontendController
     {
         $profiles = $this->getModule()->profiles;
         if (empty($profiles) || empty($profile) || !isset($profiles[$profile])) {
-            $this->forward(self::class, 'index', [], $this->getModule());
+            $this->forward(self::class, 'index');
         } else {
             $this->processForm($profiles[$profile]);
         }

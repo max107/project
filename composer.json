@@ -22,7 +22,8 @@
     "mindy/framework": "dev-master",
     "mindy/template": "dev-master",
     "guzzlehttp/guzzle": "^6.2",
-    "mindy/orm": "3.0.2"
+    "mindy/orm": "dev-master",
+    "mindy/orm_migrations": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

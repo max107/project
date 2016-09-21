@@ -9,11 +9,10 @@
 namespace Modules\Auth\Models;
 
 use Mindy\Orm\Fields\BooleanField;
-use Mindy\Orm\Fields\CharField;
 use Mindy\Orm\Fields\DateTimeField;
 use Mindy\Orm\Fields\ForeignField;
+use Mindy\Orm\Fields\IpField;
 use Mindy\Orm\Model;
-use Mindy\Validation\IpValidator;
 use Modules\User\Models\User;
 
 class AuthAttempt extends Model
@@ -27,11 +26,8 @@ class AuthAttempt extends Model
                 'verboseName' => self::t('User')
             ],
             'ip' => [
-                'class' => CharField::class,
+                'class' => IpField::class,
                 'verboseName' => self::t('Ip address'),
-                'validators' => [
-                    new IpValidator(4)
-                ]
             ],
             'last_login' => [
                 'class' => DateTimeField::class,

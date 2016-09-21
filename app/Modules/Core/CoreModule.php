@@ -2,15 +2,21 @@
 
 namespace Modules\Core;
 
-use function Mindy\app;
 use Mindy\Base\Module;
+use Mindy\Di\ServiceLocatorInterface;
 use Modules\Core\Library\CoreLibrary;
 
 class CoreModule extends Module
 {
-    public static function preConfigure()
+    /**
+     * Method will be invoked on registration of a service provider implementing
+     * this interface. Provides ability for eager loading of Service Providers.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function boot(ServiceLocatorInterface $serviceLocator)
     {
-        app()->template->addLibrary(new CoreLibrary());
+        $serviceLocator->get('template')->addLibrary(new CoreLibrary());
     }
 
     public function getAdminMenu() : array

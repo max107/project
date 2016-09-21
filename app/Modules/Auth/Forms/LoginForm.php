@@ -8,10 +8,9 @@
 
 namespace Modules\Auth\Forms;
 
-use function Mindy\app;
 use Mindy\Base\Mindy;
-use Mindy\Form\Fields\CharField;
 use Mindy\Form\Fields\PasswordField;
+use Mindy\Form\Fields\TextField;
 use Mindy\Form\Form;
 use Modules\Auth\AuthModule;
 
@@ -21,12 +20,12 @@ use Modules\Auth\AuthModule;
  */
 class LoginForm extends Form
 {
-    public function getFields()
+    public function getFields() : array
     {
         return [
             'username' => [
-                'class' => CharField::class,
-                'label' => AuthModule::t('Email or username'),
+                'class' => TextField::class,
+                'label' => AuthModule::t('modules.Auth', 'Email or username'),
                 'html' => [
                     'autocomplete' => "off",
                     'required'
@@ -34,7 +33,7 @@ class LoginForm extends Form
             ],
             'password' => [
                 'class' => PasswordField::class,
-                'label' => AuthModule::t('Password'),
+                'label' => AuthModule::t('modules.Auth', 'Password'),
                 'html' => [
                     'autocomplete' => "off",
                     'required'
@@ -58,9 +57,9 @@ class LoginForm extends Form
         ]);
 
         if (is_array($state)) {
-            $this->addErrors($state);
+            $this->setErrors($state);
         }
 
-        return $this->hasErrors() === false;
+        return count($this->getErrors()) === 0;
     }
 }

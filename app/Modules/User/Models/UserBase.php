@@ -63,77 +63,77 @@ abstract class UserBase extends Model implements UserInterface
         return [
             "username" => [
                 'class' => CharField::class,
-                'verboseName' => self::t("Username"),
+                'verboseName' => self::t('modules.User', "Username"),
                 'unique' => true
             ],
             "name" => [
                 'class' => CharField::class,
-                'verboseName' => self::t("Name"),
+                'verboseName' => self::t('modules.User', "Name"),
                 'null' => true,
             ],
             "email" => [
                 'class' => EmailField::class,
-                'verboseName' => self::t("Email"),
+                'verboseName' => self::t('modules.User', "Email"),
                 'null' => true,
             ],
             'phone' => [
                 'class' => CharField::class,
-                'verboseName' => self::t('Phone'),
+                'verboseName' => self::t('modules.User', 'Phone'),
                 'null' => true
             ],
             "password" => [
                 'class' => PasswordField::class,
                 'null' => true,
-                'verboseName' => self::t("Password"),
+                'verboseName' => self::t('modules.User', "Password"),
             ],
             "is_active" => [
                 'class' => BooleanField::class,
-                'verboseName' => self::t("Is active"),
+                'verboseName' => self::t('modules.User', "Is active"),
             ],
             "is_staff" => [
                 'class' => BooleanField::class,
-                'verboseName' => self::t("Is staff"),
+                'verboseName' => self::t('modules.User', "Is staff"),
             ],
             "is_superuser" => [
                 'class' => BooleanField::class,
-                'verboseName' => self::t("Is superuser"),
-                'helpText' => self::t('Superuser has all permissions')
+                'verboseName' => self::t('modules.User', "Is superuser"),
+                'helpText' => self::t('modules.User', 'Superuser has all permissions')
             ],
             'last_login' => [
                 'class' => DateTimeField::class,
                 'null' => true,
-                'verboseName' => self::t("Last login"),
+                'verboseName' => self::t('modules.User', "Last login"),
                 'editable' => false,
             ],
             'groups' => [
                 'class' => ManyToManyField::class,
                 'modelClass' => Group::class,
-                'verboseName' => self::t("Groups"),
+                'verboseName' => self::t('modules.User', "Groups"),
             ],
             'permissions' => [
                 'class' => ManyToManyField::class,
                 'modelClass' => Permission::class,
                 'through' => UserPermission::class,
                 'throughLink' => ['user_id', 'permission_id'],
-                'verboseName' => self::t("Permissions"),
+                'verboseName' => self::t('modules.User', "Permissions"),
             ],
             'hash_type' => [
                 'class' => CharField::class,
                 'default' => 'mindy',
                 'editable' => false,
-                'verboseName' => self::t("Password hash strategy"),
+                'verboseName' => self::t('modules.User', "Password hash strategy"),
             ],
             'created_at' => [
                 'class' => DateTimeField::class,
                 'autoNowAdd' => true,
                 'editable' => false,
-                'verboseName' => self::t('Created at')
+                'verboseName' => self::t('modules.User', 'Created at')
             ],
             'session' => [
                 'class' => HasManyField::class,
                 'modelClass' => Session::class,
                 'editable' => false,
-                'verboseName' => self::t('Session')
+                'verboseName' => self::t('modules.User', 'Session')
             ]
         ];
     }
@@ -150,7 +150,7 @@ abstract class UserBase extends Model implements UserInterface
 
     /**
      * Get current user session model
-     * @return Session
+     * @return Session|\Mindy\Orm\ModelInterface
      */
     public function getSession()
     {
