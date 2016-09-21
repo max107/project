@@ -1,1 +1,0 @@
-Yii::app()->mail->send('test', 'max@studio107.ru', array());

@@ -39,7 +39,7 @@ abstract class Admin extends BaseAdmin
      * @var array Pager config
      */
     public $pager = [
-        'pageSize' => 10
+        'pageSize' => 100
     ];
     /**
      * @var array of the column names
@@ -298,7 +298,7 @@ abstract class Admin extends BaseAdmin
         $qs = $this->prepareQuerySet($model, isset($_GET['pk']) ? $_GET['pk'] : null);
         $pager = new Pagination($qs, $this->pager);
         $columns = $this->getColumns();
-        echo $this->render($this->getTemplate('list.html'), [
+        $html = $this->render($this->getTemplate('list.html'), [
             'breadcrumbs' => $this->fetchBreadcrumbs($model, 'list'),
             'model' => $model,
             'instance' => $instance,
@@ -309,6 +309,9 @@ abstract class Admin extends BaseAdmin
             'sortingColumn' => $this->sortingColumn || $tree,
             'columns' => empty($columns) ? array_keys($model->getFields()) : $columns
         ]);
+
+        $response = $this->getRequest()->html($html)->withCachePrevention();
+        $this->getRequest()->send($response);
     }
 
     /**
@@ -409,11 +412,14 @@ abstract class Admin extends BaseAdmin
             }
         }
 
-        echo $this->render($this->getTemplate('create.html'), [
+        $html = $this->render($this->getTemplate('create.html'), [
             'form' => $form,
             'model' => $model,
             'breadcrumbs' => $this->fetchBreadcrumbs($model, 'create')
         ]);
+
+        $response = $this->getRequest()->html($html)->withCachePrevention();
+        $this->getRequest()->send($response);
     }
 
     /**
@@ -516,12 +522,15 @@ abstract class Admin extends BaseAdmin
             }
         }
 
-        echo $this->render($this->getTemplate('update.html'), [
+        $html = $this->render($this->getTemplate('update.html'), [
             'form' => $form,
             'instance' => $instance,
             'model' => $model,
             'breadcrumbs' => $this->fetchBreadcrumbs($instance, 'update')
         ]);
+
+        $response = $this->getRequest()->html($html)->withCachePrevention();
+        $this->getRequest()->send($response);
     }
 
     /**
@@ -590,7 +599,9 @@ abstract class Admin extends BaseAdmin
      */
     public function actionPrint($pk)
     {
-        echo $this->render($this->getTemplate('info_print.html'), $this->processInfo($pk));
+        $html = $this->render($this->getTemplate('info_print.html'), $this->processInfo($pk));
+        $response = $this->getRequest()->html($html)->withCachePrevention();
+        $this->getRequest()->send($response);
     }
 
     /**
@@ -731,7 +742,7 @@ abstract class Admin extends BaseAdmin
         ]);
 
         $request = $this->getRequest();
-        $referer = $request->header->get('Referer');
+        $referer = $request->getRequest()->getHeaderLine('Referer');
 
         if ($instance) {
             if ($instance->hasField($this->lockField)) {

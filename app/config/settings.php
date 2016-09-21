@@ -9,16 +9,7 @@ define('BASE_PATH', realpath(__DIR__ . '/..'));
 return [
     'name' => 'Recipe',
     'basePath' => BASE_PATH,
-    'modules' => [
-        'Admin',
-        'Auth',
-        'Core',
-        'Example',
-        'Mail',
-        'Recipe',
-        'User',
-        'UserActions'
-    ],
+    'modules' => require(__DIR__ . '/modules.php'),
     'components' => [
         'storage' => [
             'class' => '\Mindy\Storage\Storage',
@@ -38,7 +29,8 @@ return [
 //            'class' => '\Mindy\Permissions\PermissionManager'
 //        ],
         'locale' => [
-            'class' => '\Mindy\Locale\Locale'
+            'class' => '\Mindy\Translator\Locale',
+            'modulesPath' => BASE_PATH . '/Modules'
         ],
         'auth' => [
             'class' => '\Mindy\Auth\AuthProvider',
@@ -47,21 +39,19 @@ return [
                 'mindy' => '\Mindy\Auth\PasswordHasher\MindyPasswordHasher'
             ],
             'strategies' => [
-                'local' => '\Mindy\Auth\Strategy\LocalStrategy'
+                'local' => ['class' => '\Mindy\Auth\Strategy\LocalStrategy']
             ]
         ],
-        'db' => [
-            'class' => '\Mindy\Query\ConnectionManager',
-            'databases' => [
+        'db' => function () {
+            $databases = [
                 'default' => [
-                    'class' => '\Mindy\Query\Connection',
-                    'dsn' => 'mysql:host=localhost;dbname=mindy2',
-                    'username' => 'root',
-                    'password' => '',
-                    'charset' => 'utf8',
+                    'dbname' => BASE_PATH . '/sqlite.db',
+                    'host' => 'localhost',
+                    'driver' => 'pdo_sqlite',
                 ]
-            ]
-        ],
+            ];
+            return \Mindy\Creator\Creator::createObject(['class' => '\Mindy\QueryBuilder\ConnectionManager'], $databases);
+        },
         'finder' => [
             'class' => '\Mindy\Finder\Finder',
             'finders' => [
@@ -80,18 +70,17 @@ return [
         ],
         'template' => [
             'class' => '\Mindy\Template\Renderer',
-            'mode' => \Mindy\Template\Renderer::RECOMPILE_NEVER,
+            'mode' => \Mindy\Template\Renderer::RECOMPILE_NORMAL,
             'target' => BASE_PATH . '/runtime/templates',
-            'source' => function () {
-                $templates = [BASE_PATH . '/templates'];
-                $modulesTemplates = glob(BASE_PATH . '/Modules/*/templates');
-                $themesTemplates = glob(BASE_PATH . '/themes/*/templates');
-
-                return array_merge($templates, $modulesTemplates, $themesTemplates);
-            }
         ],
         'http' => [
             'class' => '\Mindy\Http\Http',
+            'session' => [
+                'class' => '\Mindy\Session\Session',
+                'handler' => [
+                    'class' => '\Mindy\Session\Adapter\NativeSessionAdapter'
+                ],
+            ],
             'middleware' => require(__DIR__ . '/middleware.php'),
         ],
         'urlManager' => [

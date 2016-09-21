@@ -3,6 +3,7 @@
 namespace Modules\User\Permissions;
 
 use HttpException;
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Mindy\Controller\Filter;
 use Mindy\Helper\Creator;
@@ -78,9 +79,8 @@ use ReflectionClass;
  * @package system.web.auth
  * @since 1.0
  */
-class PermissionControlFilter extends Filter
+class PermissionControlFilter
 {
-    public $enablePermissions = true;
     /**
      * @var string the error message to be displayed when authorization fails.
      * This property can be overridden by individual access rule via {@link CAccessRule::message}.
@@ -126,7 +126,7 @@ class PermissionControlFilter extends Filter
         $user = $app->user;
 
         $http = $app->request->http;
-        $verb = $http->getRequestType();
+        $verb = $http->getMethod();
         $ip = $http->getUserHostAddress();
 
         foreach ($this->getRules() as $rule) {
@@ -171,7 +171,6 @@ class PermissionControlFilter extends Filter
 
     /**
      * Performs the pre-action filtering.
-     * @param \Mindy\Controller\FilterChain $filterChain the filter chain that the filter is on.
      * @return bool whether the filtering process should continue and the action
      * should be executed.
      * @throws HttpException
@@ -179,13 +178,11 @@ class PermissionControlFilter extends Filter
     protected function preFilter($filterChain)
     {
         $accessRulesState = $this->defaultPreFilter($filterChain);
-        $permissionRulesState = $this->enablePermissions ? $this->permissionPreFilter($filterChain) : true;
-
-        if ($accessRulesState === false && $permissionRulesState === false) {
+        if ($accessRulesState === false) {
             return call_user_func($this->deniedCallback, $this->deniedRule);
         }
 
-        return $accessRulesState || $permissionRulesState;
+        return true;
     }
 
     /**
@@ -237,7 +234,7 @@ class PermissionControlFilter extends Filter
         } elseif ($this->message !== null) {
             return $this->message;
         } else {
-            return Translate::getInstance()->t('base', 'You are not authorized to perform this action.');
+            return app()->t('base', 'You are not authorized to perform this action.');
         }
     }
 }

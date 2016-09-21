@@ -2,7 +2,9 @@
 
 namespace Modules\User\Models;
 
+use function Mindy\app;
 use Mindy\Auth\IUser;
+use Mindy\Auth\UserInterface;
 use Mindy\Base\Mindy;
 use Mindy\Orm\Fields\BooleanField;
 use Mindy\Orm\Fields\CharField;
@@ -22,7 +24,7 @@ use Modules\Sites\Models\Site;
  * @package Modules\User
  * @method static \Modules\User\Models\UserManager objects($instance = null)
  */
-abstract class UserBase extends Model implements IUser
+abstract class UserBase extends Model implements UserInterface
 {
     use PermissionTrait;
 
@@ -58,22 +60,7 @@ abstract class UserBase extends Model implements IUser
 
     public static function getFields()
     {
-        $siteField = Mindy::app()->hasModule('Sites') ? [
-            'site' => [
-                'class' => ForeignField::class,
-                'modelClass' => Site::class,
-                'null' => true,
-                'verboseName' => self::t('Site')
-            ]
-        ] : [
-            'site_id' => [
-                'class' => IntField::class,
-                'null' => true,
-                'verboseName' => self::t('Site')
-            ],
-        ];
-
-        return array_merge([
+        return [
             "username" => [
                 'class' => CharField::class,
                 'verboseName' => self::t("Username"),
@@ -148,22 +135,12 @@ abstract class UserBase extends Model implements IUser
                 'editable' => false,
                 'verboseName' => self::t('Session')
             ]
-        ], $siteField);
-    }
-
-    public function getSite()
-    {
-        if (Mindy::app()->hasModule('Sites')) {
-            return $this->site;
-        } else if (class_exists('\Modules\Sites\Models\Site')) {
-            return Site::objects()->get(['id' => $this->site_id]);
-        }
-        return null;
+        ];
     }
 
     public function getIp()
     {
-        return Mindy::app()->http->request->getUserHostAddress();
+        return app()->http->getRequest()->getUserHostAddress();
     }
 
     public function __toString()
@@ -221,7 +198,7 @@ abstract class UserBase extends Model implements IUser
      * Возвращаем только доверенные поля модели
      * @return array
      */
-    public function toArray($groups = false, $permissions = false)
+    public function toArray()
     {
         $attributes = [];
         foreach (self::TRUSTED_FIELDS as $field) {
@@ -238,9 +215,7 @@ abstract class UserBase extends Model implements IUser
      */
     public function changePassword($password, $hasherType = null)
     {
-        /** @var \Modules\Auth\PasswordHasher\IPasswordHasher $hasher */
-        /** @var \Modules\Auth\Components\Auth $auth */
-        $auth = Mindy::app()->auth;
+        $auth = app()->auth;
         if ($hasherType === null) {
             if (empty($this->hash_type)) {
                 $hasherType = $auth->defaultPasswordHasher;

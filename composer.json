@@ -20,15 +20,9 @@
   "require": {
     "php": ">=7.0",
     "mindy/framework": "dev-master",
-    "mindy/locale": "2.0.2",
     "mindy/template": "dev-master",
-    "mindy/query": "dev-master",
-    "mindy/orm": "dev-master",
-    "mindy/query_builder": "dev-master",
-    "symfony/dom-crawler": "^3.1",
-    "symfony/css-selector": "^3.1",
     "guzzlehttp/guzzle": "^6.2",
-    "cocur/slugify": "^2.3"
+    "mindy/orm": "3.0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

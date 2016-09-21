@@ -9,7 +9,7 @@ return [
     [
         'route' => '/routes/',
         'name' => 'route_list',
-        'callback' => '\Modules\Core\Controllers\Admin\RouteController:actionLlist'
+        'callback' => '\Modules\Core\Controllers\Admin\RouteController:actionList'
     ],
     '/module/' => [
         'namespace' => 'module',

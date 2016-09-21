@@ -49,7 +49,7 @@ class AdminModule extends Module
         return $this->dashboards;
     }
 
-    public function getAdminMenu()
+    public function getAdminMenu() : array
     {
         return [
             [

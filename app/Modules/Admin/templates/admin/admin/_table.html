@@ -1,4 +1,5 @@
 <div class="table--container__main">
+    {{ pager.render(admin.getTemplate('_pager.html'))|safe }}
     <table id="table-main" data-toggle="checkboxes" data-range="true" class="">
         <thead>
         <tr>

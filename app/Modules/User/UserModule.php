@@ -3,7 +3,7 @@
 namespace Modules\User;
 
 use Mindy\Base\Module;
-use Mindy\Helper\Creator;
+use Mindy\Creator\Creator;
 
 /**
  * Class UserModule
@@ -111,7 +111,7 @@ class UserModule extends Module
         ];
     }
 
-    public function getAdminMenu()
+    public function getAdminMenu() : array
     {
         return [
             [

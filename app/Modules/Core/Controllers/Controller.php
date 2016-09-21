@@ -2,12 +2,12 @@
 
 namespace Modules\Core\Controllers;
 
+use function Mindy\app;
 use Mindy\Base\Mindy;
 use Mindy\Controller\BaseController;
 use Mindy\Helper\Json;
 use Mindy\Helper\Traits\RenderTrait;
 use Modules\User\Permissions\PermissionControlFilter;
-use Modules\User\Permissions\Rule;
 
 /**
  * All rights reserved.
@@ -23,36 +23,18 @@ class Controller extends BaseController
 {
     use RenderTrait;
 
-    public function init()
-    {
-        parent::init();
-
-        if (MINDY_DEBUG) {
-            header('Cache-Control: max-age=0');
-        }
-    }
-
     public function render($view, array $data = [])
     {
-        $site = null;
-        if (Mindy::app()->hasModule('Sites')) {
-            $site = Mindy::app()->getModule('Sites')->getSite();
-        }
         return $this->renderTemplate($view, array_merge([
             'debug' => MINDY_DEBUG,
             'this' => $this,
-            'site' => $site,
-            'app' => Mindy::app(),
-            'locale' => Mindy::app()->locale
+            'app' => app()
         ], $data));
     }
 
     public function json(array $data = [])
     {
-        if (defined('MINDY_TESTS') == false) {
-            header('Content-Type: application/json');
-        }
-        return JSON::encode($data);
+        return Json::encode($data);
     }
 
     /**
